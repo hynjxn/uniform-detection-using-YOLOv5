@@ -1,5 +1,5 @@
-import ScannerPage from "./component/page/ScannerPage";
-import MainPage from "./component/page/MainPage";
+import ScannerPage from "./component/ScannerPage";
+import MainPage from "./component/MainPage";
 import './App.css'
 
 import {
@@ -8,10 +8,10 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import Navigation from "./component/template/Navigation";
+import Navigation from "./component/Navigation";
 import {Style} from "./Style";
-import PenaltyPage from "./component/page/PenaltyPage";
-import AttendancePage from "./component/page/AttendancePage";
+import PenaltyPage from "./component/PenaltyPage";
+import AttendancePage from "./component/AttendancePage";
 
 
 

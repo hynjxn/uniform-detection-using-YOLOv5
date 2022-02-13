@@ -3,7 +3,7 @@ import React from 'react';
 function AttendancePage(props) {
     return (
         <div>
-            출석부
+            아싸부리요
         </div>
     );
 }

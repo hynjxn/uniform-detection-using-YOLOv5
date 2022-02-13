@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSchool} from '@fortawesome/free-solid-svg-icons'
-import {Style} from "../../Style";
+import {Style} from "../Style";
 
 function Navigation() {
     let a = document.location.pathname.replace("/", "")
