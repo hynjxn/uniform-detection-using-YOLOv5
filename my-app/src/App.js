@@ -17,7 +17,7 @@ import AttendancePage from "./component/AttendancePage";
 
 function App() {
   return (
-      <div className="App" style={{width: "100%", height: "100vh", backgroundColor: Style.color3}}>
+      <div className="App" style={{width: "100%"}}>
       <BrowserRouter>
           <Navigation />
           <Routes>
