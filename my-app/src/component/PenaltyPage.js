@@ -12,14 +12,21 @@ import StudentAddForm from "./StudentAddForm";
 
 function PenaltyPage(props) {
     const contents = [{
-        id: 1, student_id: "21319", student_name: "신은수", parent_ph:
+        student_id: "21319", student_name: "신은수", parent_ph:
             "010-4710-6207", penalty_points: "-17"
     }, {
-        id: 2, student_id: "21320", student_name: "신은수", parent_ph:
+        student_id: "21320", student_name: "신은수", parent_ph:
             "010-4710-6207", penalty_points: "-17"
     }];
+
     // const [content, setContent] = useState([]);
     const [word, setWord] = useState({input: "", select: ""});
+    const [currentInfo, setCurrentInfo] = useState({
+        student_id: "",
+        student_name: "",
+        parent_ph: "",
+        penalty_points: ""
+    })
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -30,15 +37,36 @@ function PenaltyPage(props) {
         // setContents([{},{}....])
     }, []);
 
-    const handleChange = (e) => {
-        const {name, value} = e.target
+    const handleSearchFormChange = (e) => {
+        const {name, value} = e.target;
         setWord({...word, [name]: value});
     }
 
+    const handleAddFormInputChange = (e)=>{
+        const {name, value} = e.target;
+        setCurrentInfo({
+            ...currentInfo,
+            [name]: value
+        })
+    }
+
     const clickAddButtonFunction = () => {
+        setCurrentInfo({
+            student_id: "",
+            student_name: "",
+            parent_ph: "",
+            penalty_points: ""
+        })
         handleOpen();
     }
-    const clickEditButtonFunction = () => {
+
+    const clickEditButtonFunction = (e) => {
+        if (e.target.getAttribute('name') != null) {
+            setCurrentInfo(contents[parseInt(e.target.getAttribute('name'))])
+        } else {
+            setCurrentInfo(contents[parseInt(e.target.parentNode.getAttribute('name'))])
+        }
+
         handleOpen();
     }
 
@@ -73,7 +101,7 @@ function PenaltyPage(props) {
     return (
         <Main>
             <div style={{marginBottom: "30px", display: "flex", alignItems: "center"}}>
-                <CustomInput type="penaltyInput" onChangeFunction={handleChange} input={word.input}
+                <CustomInput type="penaltyInput" onChangeFunction={handleSearchFormChange} input={word.input}
                              select={word.select}/>
             </div>
             <CustomTable type="penaltyTable" contents={contents} deleteFunction={deleteFunction}
@@ -82,7 +110,7 @@ function PenaltyPage(props) {
                           backgroundColor={Style.color1}/>
             <Modal open={open} style={{padding: "0px"}}>
                 <Box sx={style}>
-                    <StudentAddForm onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose}/>
+                    <StudentAddForm onChangeFunction={handleAddFormInputChange} onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose} currentInfo={currentInfo}/>
                 </Box>
             </Modal>
         </Main>

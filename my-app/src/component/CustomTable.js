@@ -63,18 +63,18 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {contents.map((content) => (
-                        <StyledTableRow key={content.id}>
+                    {contents.map((content, index) => (
+                        <StyledTableRow key={index+1}>
                             <StyledTableCell component="th" scope="row" align="center">
-                                {content.id}
+                                {index+1}
                             </StyledTableCell>
                             <StyledTableCell align="center">{content.student_id}</StyledTableCell>
                             <StyledTableCell align="center">{content.student_name}</StyledTableCell>
                             <StyledTableCell align="center">{content.parent_ph}</StyledTableCell>
                             <StyledTableCell align="center">{content.penalty_points}</StyledTableCell>
                             <StyledTableCell align="center">
-                                <DeleteIcon style={{marginRight: "20px", cursor: "pointer"}} onClick={deleteFunction}/>
-                                <EditIcon style={{cursor: "pointer"}} onClick={editFunction}/>
+                                <DeleteIcon name={index} style={{marginRight: "20px", cursor: "pointer"}} onClick={deleteFunction}/>
+                                <EditIcon name={index} style={{cursor: "pointer"}} onClick={editFunction}/>
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}

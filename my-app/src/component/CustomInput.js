@@ -3,13 +3,14 @@ import {InputAdornment, MenuItem, OutlinedInput, TextField} from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import {Style} from "../Style";
 
-function CustomInput({type, onChangeFunction, input, select, placeholder}) {
+function CustomInput({type, name, defaultValue, onChangeFunction, input, select, placeholder}) {
     let element;
     if (type === "normalInput") {
         element = <OutlinedInput
             id="outlined-adornment-weight"
-            name="input"
+            name={name}
             value={input}
+            defaultValue={defaultValue}
             onChange={onChangeFunction}
             style={{
                 width: 300,

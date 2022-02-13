@@ -16,10 +16,10 @@ function ScannerPage(props) {
         setInput(value);
     }
 
-    // useEffect(() => {
-    //     console.log(input)
-    // }, [input])
-    //
+    useEffect(() => {
+        console.log(input)
+    }, [input])
+
 
 
     // 사진 촬영 요청하고 결과값 가져오는 함수
@@ -39,7 +39,7 @@ function ScannerPage(props) {
                     <CustomTable type="scannerTable" contents={contents}/>
                 </div>
                 <div style={{marginBottom: "20px"}}>
-                    <CustomInput type="normalInput" onChangeFunction={handleChange} input={input} placeholder="학번 입력"/>
+                    <CustomInput type="normalInput" name="input" onChangeFunction={handleChange} input={input} placeholder="학번 입력"/>
 
                 </div>
                 <div style={{display: "flex"}}>
