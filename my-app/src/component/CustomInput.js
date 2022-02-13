@@ -3,31 +3,55 @@ import {InputAdornment, MenuItem, OutlinedInput, TextField} from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import {Style} from "../Style";
 
-function CustomInput(props) {
-    return (
-        <>
+function CustomInput({type, name, defaultValue, onChangeFunction, input, select, placeholder}) {
+    let element;
+    if (type === "normalInput") {
+        element = <OutlinedInput
+            id="outlined-adornment-weight"
+            name={name}
+            value={input}
+            defaultValue={defaultValue}
+            onChange={onChangeFunction}
+            style={{
+                width: 300,
+                borderRadius: "10px",
+                boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
+                fontFamily: Style.font
+            }}
+            size="small"
+            placeholder={placeholder}
+        />
+    } else if (type === "penaltyInput") {
+        element =
             <OutlinedInput
+                name="input"
+                value={input}
+                onChange={onChangeFunction}
                 id="outlined-adornment-weight"
-                style={{width: 300, borderRadius: "20px"}}
+                style={{
+                    width: 400,
+                    borderRadius: "20px",
+                    boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
+                    fontFamily: Style.font
+                }}
                 startAdornment={
-                    <select name="pets" id="pet-select" style={{
-                        border: "none",
-                        outline: "none",
-                        background: `${Style.color3}`,
-                        marginRight: "20px"
-                    }}>
-                        <option value="dog">Dog</option>
-                        <option value="cat">Cat</option>
-                        <option value="hamster">Hamster</option>
-                        <option value="parrot">Parrot</option>
-                        <option value="spider">Spider</option>
-                        <option value="goldfish">Goldfish</option>
+                    <select name="select" value={select} onChange={onChangeFunction}
+                            style={{
+                                border: "none",
+                                outline: "none",
+                                background: `${Style.color3}`,
+                                marginRight: "20px",
+                                backgroundColor: "transparent"
+                            }}>
+                        <option value="student_id">학번</option>
+                        <option value="student_name">이름</option>
                     </select>
                 }
                 endAdornment={<InputAdornment position="end"><SearchIcon/></InputAdornment>}
-
             />
-        </>
+    }
+    return (
+        element
 
     );
 }
