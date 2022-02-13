@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import CustomInput from "./CustomInput";
-import CustomizedTable from "./CustomizedTable";
+import CustomTable from "./CustomTable";
+import CustomButton from "./CustomButton";
+import styled from 'styled-components';
+import {Style} from "../Style";
+import Swal from "sweetalert2";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import StudentAddForm from "./StudentAddForm";
 
 function PenaltyPage(props) {
-    // const [content, setContent] = useState([]);
-
     const contents = [{
         id: 1, student_id: "21319", student_name: "신은수", parent_ph:
             "010-4710-6207", penalty_points: "-17"
@@ -12,21 +18,100 @@ function PenaltyPage(props) {
         id: 2, student_id: "21320", student_name: "신은수", parent_ph:
             "010-4710-6207", penalty_points: "-17"
     }];
+    // const [content, setContent] = useState([]);
+    const [word, setWord] = useState({input: "", select: ""});
 
-    useEffect(()=>{
-        //학생 불러오기
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    useEffect(() => {
+        // 학생 불러오기
+        // setContents([{},{}....])
     }, []);
 
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        setWord({...word, [name]: value});
+    }
+
+    const clickAddButtonFunction = () => {
+        handleOpen();
+    }
+    const clickEditButtonFunction = () => {
+        handleOpen();
+    }
+
+    const saveStudentFunction = () => {
+        // 저장 api 요청 함수
+    }
+
+    const deleteFunction = () => {
+        Swal.fire({
+            title: '정말 삭제하시겠습니까?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: '확인',
+            cancelButtonText: '취소',
+            confirmButtonColor: Style.color1,
+            showLoaderOnConfirm: true,
+            preConfirm: (login) => {
+                // db에 삭제요청 보내기
+                return fetch(`//api.github.com/users/${login}`)
+                    .then(response => {
+                        //성공 시 삭제되었습니다 swal창
+                    })
+                    .catch(error => {
+                        //실패 시 다시 한번 시도해주세요 swal창
+                    })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        })
+
+    }
 
     return (
-        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-            <div style={{marginBottom: "30px"}}>
-                <CustomInput type="penaltyInput"/>
+        <Main>
+            <div style={{marginBottom: "30px", display: "flex", alignItems: "center"}}>
+                <CustomInput type="penaltyInput" onChangeFunction={handleChange} input={word.input}
+                             select={word.select}/>
             </div>
-            <CustomizedTable type="penaltyTable" contents={contents}/>
-
-        </div>
+            <CustomTable type="penaltyTable" contents={contents} deleteFunction={deleteFunction}
+                         editFunction={clickEditButtonFunction}/>
+            <CustomButton content={<span>학생추가 +</span>} onClickFunction={clickAddButtonFunction}
+                          backgroundColor={Style.color1}/>
+            <Modal open={open} style={{padding: "0px"}}>
+                <Box sx={style}>
+                    <StudentAddForm onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose}/>
+                </Box>
+            </Modal>
+        </Main>
     );
 }
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & > button { /*콜직원 추가*/
+    position: fixed;
+    bottom: 40px;
+  }
+`;
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: "rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset",
+    p: 4,
+    borderRadius: "10px",
+    padding: '0px'
+};
+
 
 export default PenaltyPage;
