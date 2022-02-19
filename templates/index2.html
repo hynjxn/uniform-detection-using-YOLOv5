@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index2</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/a434b3ffc3.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../static/javascript/navbar.js" defer></script>
+    <script src="../static/javascript/search.js" defer></script>
+    <script src="../static/javascript/table.js" defer></script>
+    <script src="../static/javascript/popup.js" defer></script>
+  </head>
+   <body>
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <i class="fas fa-school"></i>
+        <a href="">OO여고 불량교복 인식 시스템</a>
+      </div>
+      <ul class="navbar__menu">
+        <li><a href="/">홈</a></li>
+        <li><a href="/scanner">스캐너</a></li>
+        <li><a href="/penalty">벌점기록부</a></li>
+        <li><a href="/attendance">출석부</a></li>
+      </ul>
+
+      <a href="#" class="navbar__toggleBtn">
+        <i class="fas fa-bars"></i>
+      </a>
+    </nav>
+
+    <article class="main-area__table">
+      ,
+      <div class="main-area__table__top">
+        <div class="addBtn" onclick="showPopupA()">등록</div>
+
+        <div class="search">
+          <select class="search-options">
+            <option value="name">학번</option>
+            <option value="student-id">이름</option>
+            <option value="phone-number">전화번호</option>
+          </select>
+          <input type="text" class="search-input" />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>학번</th>
+            <th>이름</th>
+            <th>학부모 전화번호</th>
+            <th>벌점</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+        </tbody>
+      </table>
+    </article>
+
+    <div id="container" class="popup-container">
+      <div class="popup">
+        <button id="close" class="close">X</button>
+        <h1 id="popup__title">학생 추가하기</h1>
+        <div class="inputs">
+          <div class="popup__input-box">
+            <label for="student-id">학번</label>
+            <input type="text" id="student-id" placeholder="예시)21319" />
+          </div>
+          <div class="popup__input-box">
+            <label for="student-name">이름</label>
+            <input type="text" id="student-name" placeholder="예시)홍길동" />
+          </div>
+          <div class="popup__input-box">
+            <label for="parent-phonenumber">학부모 전화번호</label>
+            <input
+              type="text"
+              id="parent-phonenumber"
+              placeholder="예시)010-1234-5678"
+            />
+          </div>
+          <div class="popup__input-box">
+            <label for="student-penaltypoints">벌점</label>
+            <input
+              type="text"
+              id="student-penaltypoints"
+              placeholder="0"
+            />
+          </div>
+        </div>
+        <div class="popup__buttons">
+          <button
+            class="cta"
+            id="deleteStudentBtn"
+            onclick="clickDeleteStudentBtn()"
+            hidden
+          >
+            삭제하기
+          </button>
+          <button class="cta" id="addStudentBtn" onclick="clickAddStudentBtn()">
+            추가하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
