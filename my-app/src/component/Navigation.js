@@ -23,70 +23,72 @@ function Navigation() {
 
     return (
         <div style={{
-            width: "100%",
-            height: "100px",
+            height: "90px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "0px 10px"
+            padding: "20px 30px",
+            backgroundColor: Style.color2,
+            borderRadius: "20px"
         }}>
-            <div style={{width: "33%",}}>
+            <div style={{width: "40%",}}>
                 <Link to={"/"} style={{
                     textDecoration: "none",
-                    display: "flex"
+                    display: "flex",
+                    alignItems: "center"
                 }}>
-                    <FontAwesomeIcon name="scanner" onClick={onClickFunction} icon={faSchool}
-                                     style={{fontSize: "30px", color: Style.color4}}/>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                        backgroundColor: Style.color4
+                    }}>
+                        <FontAwesomeIcon name="scanner" onClick={onClickFunction} icon={faSchool}
+                                         style={{fontSize: "20px", color: "white"}}/>
+                    </div>
                     <div name="scanner" onClick={onClickFunction} style={{
-                        color: Style.color2,
                         fontSize: "30px",
                         fontWeight: 600,
                         marginLeft: "10px",
-                    }}>OO여고 교복탐지시스템</div>
+                        color: Style.color3
+                    }}>OO여고 교복탐지시스템
+                    </div>
                 </Link>
             </div>
-            <div style={{width: "33%", display: "flex", justifyContent: "space-between", alignItems: 'center'}}>
+            <div style={{width: "40%", display: "flex", justifyContent: "space-between", alignItems: 'center'}}>
                 <StyledLink to={"/scanner"} onClick={(event) => onClickFunction(event)}>
                     <StyledMenu name="scanner"
                                 style={{
-                                    backgroundColor: `${selected === "scanner" ? Style.color2 : "transparent"}`,
-                                    color: `${selected === "scanner" ? "white" : Style.color2}`
+                                    backgroundColor: `${selected === "scanner" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
+                                    color: "white"
                                 }}
                     >스캐너</StyledMenu>
                 </StyledLink>
                 <StyledLink to={"/penalty"} onClick={(event) => onClickFunction(event)}>
                     <StyledMenu name="penalty"
                                 style={{
-                                    backgroundColor: `${selected === "penalty" ? Style.color2 : "transparent"}`,
-                                    color: `${selected === "penalty" ? "white" : Style.color2}`
+                                    backgroundColor: `${selected === "penalty" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
+                                    color: "white"
                                 }}
                     >벌점기록부</StyledMenu>
                 </StyledLink>
                 <StyledLink to={"/attendance"} onClick={(event) => onClickFunction(event)}>
                     <StyledMenu name="attendance"
                                 style={{
-                                    backgroundColor: `${selected === "attendance" ? Style.color2 : "transparent"}`,
-                                    color: `${selected === "attendance" ? "white" : Style.color2}`
+                                    backgroundColor: `${selected === "attendance" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
+                                    color: "white"
                                 }}
                     >출석부</StyledMenu>
                 </StyledLink>
             </div>
-            <div style={{width: "33%"}}></div>
 
         </div>
 
     );
 }
-
-const StyledLink = styled(Link)`
-text-decoration: none;
-width: 33%;
-	&:hover > div {
-        background-color: rgba(18,50,66,0.5);
-        color: white;
-    }
- 
-`;
 
 const StyledMenu = styled.div`
   width: 80%;
@@ -95,6 +97,18 @@ const StyledMenu = styled.div`
   font-weight: 600;
   text-align: center;
 `;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  width: 33%;
+
+  &:hover ${StyledMenu}{
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+`;
+
+
 
 export default Navigation;
 

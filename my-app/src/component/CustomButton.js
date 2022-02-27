@@ -7,11 +7,12 @@ function CustomButton({content, backgroundColor, borderColor, color, onClickFunc
         <Button variant="contained" style={{
             backgroundColor: `${backgroundColor}`,
             border: `1.5px solid ${borderColor}`,
-            width: "150px",
+            width: "45%",
             height: "50px",
             color:`${color}`,
             fontWeight: 600,
-            fontFamily: Style.font
+            fontFamily: Style.font,
+            borderRadius: "20px",
         }} 청 onClick={onClickFunction}>{content}</Button>
 
     );

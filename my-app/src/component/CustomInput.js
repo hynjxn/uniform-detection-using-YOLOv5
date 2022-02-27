@@ -13,12 +13,11 @@ function CustomInput({type, name, defaultValue, onChangeFunction, input, select,
             defaultValue={defaultValue}
             onChange={onChangeFunction}
             style={{
-                width: 300,
-                borderRadius: "10px",
-                boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
-                fontFamily: Style.font
+                width: "80%",
+                borderRadius: "20px",
+                fontFamily: Style.font,
+                textAlign: "center"
             }}
-            size="small"
             placeholder={placeholder}
         />
     } else if (type === "penaltyInput") {

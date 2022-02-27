@@ -19,8 +19,9 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
             boxShadow: "rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset",
             maxHeight: 700,
             overflow: "auto",
+            backgroundColor: Style.color2,
         }}>
-            <Table aria-label="customized table">
+            <Table aria-label="customized table" >
                 <TableHead>
                     <TableRow>
                         <StyledTableCell align="center">교복분류</StyledTableCell>
@@ -91,10 +92,14 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
         fontFamily: Style.font,
+        color: "white"
+
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
-        fontFamily: Style.font
+        fontFamily: Style.font,
+        color: "white"
+
 
     },
 }));
