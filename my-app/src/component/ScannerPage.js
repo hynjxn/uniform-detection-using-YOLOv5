@@ -33,7 +33,8 @@ function ScannerPage(props) {
     }
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "80vh"}}>
-            <div style={{width: "500px", height: "500px", background: "pink", marginRight: "30px"}}></div>
+            {/*<div style={{width: "500px", height: "500px", background: "pink", marginRight: "30px"}}></div>*/}
+            <img src={'/video_feed'} className="App-logo" alt="logo" />
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <div style={{marginBottom: "20px"}}>
                     <CustomTable type="scannerTable" contents={contents}/>
