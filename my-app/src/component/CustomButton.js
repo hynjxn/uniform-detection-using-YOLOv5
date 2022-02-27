@@ -2,12 +2,12 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import {Style} from "../Style";
 
-function CustomButton({content, backgroundColor, borderColor, color, onClickFunction}) {
+function CustomButton({content, width, backgroundColor, borderColor, color, onClickFunction}) {
     return (
         <Button variant="contained" style={{
             backgroundColor: `${backgroundColor}`,
             border: `1.5px solid ${borderColor}`,
-            width: "45%",
+            width: width,
             height: "50px",
             color:`${color}`,
             fontWeight: 600,

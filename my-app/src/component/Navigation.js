@@ -18,6 +18,7 @@ function Navigation() {
     });
 
     const onClickFunction = (event) => {
+        console.dir(event.target);
         setSelected(event.target.getAttribute('name'));
     }
 
@@ -31,11 +32,13 @@ function Navigation() {
             backgroundColor: Style.color2,
             borderRadius: "20px"
         }}>
-            <div style={{width: "40%",}}>
+            <div style={{
+                width: "auto"
+            }}>
                 <Link to={"/"} style={{
                     textDecoration: "none",
                     display: "flex",
-                    alignItems: "center"
+                    alignItems: "center",
                 }}>
                     <div style={{
                         display: "flex",
@@ -45,7 +48,7 @@ function Navigation() {
                         height: "50px",
                         borderRadius: "50%",
                         backgroundColor: Style.color4
-                    }}>
+                    }} onClick={onClickFunction} name="scanner">
                         <FontAwesomeIcon name="scanner" onClick={onClickFunction} icon={faSchool}
                                          style={{fontSize: "20px", color: "white"}}/>
                     </div>
@@ -102,12 +105,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   width: 33%;
 
-  &:hover ${StyledMenu}{
+  &:hover ${StyledMenu} {
     background-color: rgba(255, 255, 255, 0.3);
   }
 
 `;
-
 
 
 export default Navigation;

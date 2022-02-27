@@ -46,7 +46,7 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
     }
     else if (type === "penaltyTable") {
         element = <TableContainer sx={{
-            width: "900px",
+            width: "80%",
             borderRadius: "10px",
             boxShadow: "rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset",
             maxHeight: 700,
@@ -92,13 +92,11 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
         fontFamily: Style.font,
-        color: "white"
 
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
         fontFamily: Style.font,
-        color: "white"
 
 
     },

@@ -109,9 +109,12 @@ function ScannerPage(props) {
                         justifyContent: "center",
                         alignItems: "center"
                     }}>
-                        <CustomInput type="normalInput" name="input" onChangeFunction={handleChange} input={input} placeholder="Please Enter your Student ID"/>
-                        <div style={{display: "flex", width: "80%", justifyContent: "space-between", marginTop: "10px"}}>
+                        <CustomInput type="normalInput" name="input" onChangeFunction={handleChange} input={input}
+                                     placeholder="Please Enter your Student ID"/>
+                        <div
+                            style={{display: "flex", width: "80%", justifyContent: "space-between", marginTop: "10px"}}>
                             <CustomButton
+                                width="45%"
                                 content={<>
                                     <FontAwesomeIcon name="scanner" icon={faCamera}
                                                      style={{fontSize: 30, marginRight: "20"}}/>
@@ -121,11 +124,12 @@ function ScannerPage(props) {
                                 backgroundColor={Style.color3} borderColor={Style.color1}
                                 color={Style.color2}
                                 onClickFunction={scanFunction}/>
-                            <CustomButton content={<>
-                                <FontAwesomeIcon name="scanner" icon={faFloppyDisk}
-                                                 style={{fontSize: 30, marginRight: "20"}}/>
-                                <span style={{fontSize: 25}}>SAVE</span>
-                            </>} backgroundColor={Style.color1} borderColor={Style.color1}
+                            <CustomButton width="45%"
+                                          content={<>
+                                              <FontAwesomeIcon name="scanner" icon={faFloppyDisk}
+                                                               style={{fontSize: 30, marginRight: "20"}}/>
+                                              <span style={{fontSize: 25}}>SAVE</span>
+                                          </>} backgroundColor={Style.color1} borderColor={Style.color1}
                                           onClickFunction={saveFunction}/>
                         </div>
                     </div>

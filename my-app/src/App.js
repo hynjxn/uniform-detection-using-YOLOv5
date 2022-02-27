@@ -21,7 +21,7 @@ function App() {
                 <BrowserRouter>
                     <Navigation/>
                     <Routes>
-                        <Route path="/" element={<MainPage/>}/>
+                        <Route path="/" element={<ScannerPage/>}/>
                         <Route path="/scanner" element={<ScannerPage/>}/>
                         <Route path="/penalty" element={<PenaltyPage/>}/>
                         <Route path="/attendance" element={<AttendancePage/>}/>

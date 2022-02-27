@@ -42,12 +42,18 @@ function PenaltyPage(props) {
         setWord({...word, [name]: value});
     }
 
-    const handleAddFormInputChange = (e)=>{
+    const handleAddFormInputChange = (e) => {
         const {name, value} = e.target;
         setCurrentInfo({
             ...currentInfo,
             [name]: value
         })
+    }
+
+    const searchFunction = (e)=>{
+        e.preventDefault();
+        // 검색 api 요청을 한다.
+        // setContent(content)
     }
 
     const clickAddButtonFunction = () => {
@@ -100,17 +106,30 @@ function PenaltyPage(props) {
 
     return (
         <Main>
-            <div style={{marginBottom: "30px", display: "flex", alignItems: "center"}}>
-                <CustomInput type="penaltyInput" onChangeFunction={handleSearchFormChange} input={word.input}
-                             select={word.select}/>
+            <div style={{
+                margin: "30px 0px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "80%",
+                position:"relative"
+            }}>
+                <CustomInput type="penaltyInput" width="50%"  onSearchFunction={searchFunction} onChangeFunction={handleSearchFormChange}
+                                                         input={word.input}
+                                                         select={word.select}/>
+                <div style={{position:"absolute", right:"15%"}}><CustomButton width="auto" content={<span>학생추가 +</span>}
+                                                          onClickFunction={clickAddButtonFunction}
+                                                          backgroundColor={Style.color1}/>
+                </div>
             </div>
             <CustomTable type="penaltyTable" contents={contents} deleteFunction={deleteFunction}
                          editFunction={clickEditButtonFunction}/>
-            <CustomButton content={<span>학생추가 +</span>} onClickFunction={clickAddButtonFunction}
-                          backgroundColor={Style.color1}/>
+
             <Modal open={open} style={{padding: "0px"}}>
                 <Box sx={style}>
-                    <StudentAddForm onChangeFunction={handleAddFormInputChange} onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose} currentInfo={currentInfo}/>
+                    <StudentAddForm onChangeFunction={handleAddFormInputChange}
+                                    onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose}
+                                    currentInfo={currentInfo}/>
                 </Box>
             </Modal>
         </Main>
@@ -118,15 +137,15 @@ function PenaltyPage(props) {
 }
 
 const Main = styled.div`
+  width: 100%;
+  height: 80vh;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
-  & > button { /*콜직원 추가*/
-    position: fixed;
-    bottom: 40px;
-  }
 `;
 
 const style = {
