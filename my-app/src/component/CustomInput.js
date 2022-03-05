@@ -29,6 +29,7 @@ function CustomInput({
                 textAlign: "center"
             }}
             placeholder={placeholder}
+
         />
     } else if (type === "penaltyInput") {
         element =
@@ -55,8 +56,8 @@ function CustomInput({
                                     marginRight: "20px",
                                     backgroundColor: "transparent"
                                 }}>
-                            <option value="student_id">학번</option>
-                            <option value="student_name">이름</option>
+                            <option value="student_id">StudentID</option>
+                            <option value="student_name">StudentName</option>
                         </select>
                     }
                     endAdornment={<InputAdornment position="end"><SearchIcon/></InputAdornment>}

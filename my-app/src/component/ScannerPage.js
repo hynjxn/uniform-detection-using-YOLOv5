@@ -109,11 +109,11 @@ const Main = styled.div`
 
 const MainInner = styled.div`
   display: flex;
-  width: 90%;
+  width: 93%;
   height: 75%;
   background-color: ${Style.color3};
   border-radius: 20px;
-  padding: 20px 50px;
+  padding: 40px 0px;
   justify-content: center;
   align-items: center;
 `;
@@ -156,7 +156,7 @@ const TableCell = styled.div`
 
 const RightBottom = styled.div`
   width: 100%;
-  height: 45%;
+  height: 55%;
   background-color: white;
   border-radius: 20px;
   display: flex;

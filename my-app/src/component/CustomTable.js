@@ -24,10 +24,10 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell></StyledTableCell>
-                        <StyledTableCell align="center">학번</StyledTableCell>
-                        <StyledTableCell align="center">이름</StyledTableCell>
-                        <StyledTableCell align="center">학부모 전화번호</StyledTableCell>
-                        <StyledTableCell align="center">벌점</StyledTableCell>
+                        <StyledTableCell align="center">StudentID</StyledTableCell>
+                        <StyledTableCell align="center">StudentName</StyledTableCell>
+                        <StyledTableCell align="center">Parent PhoneNumber</StyledTableCell>
+                        <StyledTableCell align="center">PenaltyPoints</StyledTableCell>
                         <StyledTableCell align="center"></StyledTableCell>
                     </TableRow>
                 </TableHead>
