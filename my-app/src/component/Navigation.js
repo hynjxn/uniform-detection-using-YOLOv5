@@ -53,30 +53,31 @@ function Navigation() {
                                          style={{fontSize: "20px", color: "white"}}/>
                     </div>
                     <div name="scanner" onClick={onClickFunction} style={{
-                        fontSize: "30px",
+                        fontSize: "25px",
                         fontWeight: 600,
                         marginLeft: "10px",
-                        color: Style.color3
-                    }}>OO여고 교복탐지시스템
+                        color: Style.color3,
+                        textAlign:"center"
+                    }}>OO Girl's HighSchool<br /> UniformDetecting System
                     </div>
                 </Link>
             </div>
-            <div style={{width: "40%", display: "flex", justifyContent: "space-between", alignItems: 'center'}}>
+            <div style={{width: "45%", display: "flex", justifyContent: "space-between", alignItems: 'center'}}>
                 <StyledLink to={"/scanner"} onClick={(event) => onClickFunction(event)}>
                     <StyledMenu name="scanner"
                                 style={{
                                     backgroundColor: `${selected === "scanner" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
                                     color: "white"
                                 }}
-                    >스캐너</StyledMenu>
+                    >Scanner</StyledMenu>
                 </StyledLink>
                 <StyledLink to={"/penalty"} onClick={(event) => onClickFunction(event)}>
                     <StyledMenu name="penalty"
                                 style={{
                                     backgroundColor: `${selected === "penalty" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
-                                    color: "white"
+                                    color: "white",
                                 }}
-                    >벌점기록부</StyledMenu>
+                    >School Record</StyledMenu>
                 </StyledLink>
                 <StyledLink to={"/attendance"} onClick={(event) => onClickFunction(event)}>
                     <StyledMenu name="attendance"
@@ -84,7 +85,7 @@ function Navigation() {
                                     backgroundColor: `${selected === "attendance" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
                                     color: "white"
                                 }}
-                    >출석부</StyledMenu>
+                    >Attendance</StyledMenu>
                 </StyledLink>
             </div>
 
@@ -94,11 +95,12 @@ function Navigation() {
 }
 
 const StyledMenu = styled.div`
-  width: 80%;
+  width: 90%;
   padding: 10px;
   border-radius: 20px;
   font-weight: 600;
   text-align: center;
+  font-size: 20px;
 `;
 
 const StyledLink = styled(Link)`
