@@ -1,8 +1,9 @@
-from flask import Flask, render_template, jsonify, request, Response
+from flask import Flask, render_template, jsonify, request, Response, send_from_directory
 import time
 import pymysql
 import yaml
 import cv2
+import os
 from model.detect import do_detect
 import warnings
 warnings.filterwarnings(action='ignore')
@@ -22,20 +23,15 @@ with open('info.yaml') as f:
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='my-app/build')
 
-''' ########## Main Function ########## '''
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/penalty')
-def penalty():
-    return render_template('index2.html')
-
-@app.route('/scanner')
-def scanner():
-    return render_template('index3.html')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 

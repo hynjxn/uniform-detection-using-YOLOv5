@@ -37,6 +37,7 @@ function ScannerPage(props) {
                     marginRight: "30px",
                     borderRadius: "20px"
                 }}>이미지
+
                 </div>
                 <Right>
                     <TableContainer>
