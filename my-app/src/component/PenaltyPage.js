@@ -6,9 +6,10 @@ import styled from 'styled-components';
 import {Style} from "../Style";
 import Swal from "sweetalert2";
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import StudentAddForm from "./StudentAddForm";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFloppyDisk, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
 function PenaltyPage(props) {
     const contents = [{
@@ -20,6 +21,7 @@ function PenaltyPage(props) {
     }];
 
     // const [content, setContent] = useState([]);
+
     const [word, setWord] = useState({input: "", select: ""});
     const [currentInfo, setCurrentInfo] = useState({
         student_id: "",
@@ -29,6 +31,7 @@ function PenaltyPage(props) {
     })
 
     const [open, setOpen] = React.useState(false);
+    const [addOrEdit,setAddOrEdit] = React.useState("");
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -42,12 +45,18 @@ function PenaltyPage(props) {
         setWord({...word, [name]: value});
     }
 
-    const handleAddFormInputChange = (e)=>{
+    const handleAddFormInputChange = (e) => {
         const {name, value} = e.target;
         setCurrentInfo({
             ...currentInfo,
             [name]: value
         })
+    }
+
+    const searchFunction = (e)=>{
+        e.preventDefault();
+        // 검색 api 요청을 한다.
+        // setContent(content)
     }
 
     const clickAddButtonFunction = () => {
@@ -57,6 +66,7 @@ function PenaltyPage(props) {
             parent_ph: "",
             penalty_points: ""
         })
+        setAddOrEdit("Add")
         handleOpen();
     }
 
@@ -66,21 +76,26 @@ function PenaltyPage(props) {
         } else {
             setCurrentInfo(contents[parseInt(e.target.parentNode.getAttribute('name'))])
         }
-
+        setAddOrEdit("Edit")
         handleOpen();
     }
 
     const saveStudentFunction = () => {
-        // 저장 api 요청 함수
+        if(addOrEdit === "Add"){
+            // 저장 api 요청 함수
+        }
+        else if(addOrEdit === "Edit"){
+            // 수정 api 요청 함수
+        }
     }
 
     const deleteFunction = () => {
         Swal.fire({
-            title: '정말 삭제하시겠습니까?',
+            title: 'Delete Anyway?',
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: '확인',
-            cancelButtonText: '취소',
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
             confirmButtonColor: Style.color1,
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
@@ -100,17 +115,39 @@ function PenaltyPage(props) {
 
     return (
         <Main>
-            <div style={{marginBottom: "30px", display: "flex", alignItems: "center"}}>
-                <CustomInput type="penaltyInput" onChangeFunction={handleSearchFormChange} input={word.input}
-                             select={word.select}/>
+            <div style={{
+                margin: "30px 0px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "80%",
+                position:"relative"
+            }}>
+                <CustomInput type="penaltyInput" width="50%"  onSearchFunction={searchFunction} onChangeFunction={handleSearchFormChange}
+                                                         input={word.input}
+                                                         select={word.select}/>
+                <div style={{position:"absolute", right:"13%"}}><CustomButton width="auto" content={
+                    <>
+                        <FontAwesomeIcon name="scanner" icon={faUserPlus} color="white"
+                                         style={{fontSize: 20, marginRight: "10"}}/>
+                        <span style={{fontSize: 18}}>Add</span>
+                    </>
+                }
+                                                          onClickFunction={clickAddButtonFunction}
+                                                          backgroundColor={Style.color1}/>
+                </div>
             </div>
             <CustomTable type="penaltyTable" contents={contents} deleteFunction={deleteFunction}
                          editFunction={clickEditButtonFunction}/>
-            <CustomButton content={<span>학생추가 +</span>} onClickFunction={clickAddButtonFunction}
-                          backgroundColor={Style.color1}/>
+
             <Modal open={open} style={{padding: "0px"}}>
                 <Box sx={style}>
-                    <StudentAddForm onChangeFunction={handleAddFormInputChange} onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose} currentInfo={currentInfo}/>
+                    <StudentAddForm onChangeFunction={handleAddFormInputChange}
+                                    onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose}
+                                    currentInfo={currentInfo}
+                                    addOrEdit = {addOrEdit}
+                    />
+
                 </Box>
             </Modal>
         </Main>
@@ -118,15 +155,15 @@ function PenaltyPage(props) {
 }
 
 const Main = styled.div`
+  width: 100%;
+  height: 80vh;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
-  & > button { /*콜직원 추가*/
-    position: fixed;
-    bottom: 40px;
-  }
 `;
 
 const style = {
