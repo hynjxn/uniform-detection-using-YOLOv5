@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/a434b3ffc3.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../static/javascript/navbar.js" defer></script>
+    <script src="../static/javascript/attendance.js" defer></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <i class="fas fa-school"></i>
+        <a href="">OO여고 불량교복 인식 시스템</a>
+      </div>
+      <ul class="navbar__menu">
+        <li><a href="/">홈</a></li>
+        <li><a href="/scanner">스캐너</a></li>
+        <li><a href="/penalty">벌점기록부</a></li>
+        <li><a href="/attendance">출석부</a></li>
+      </ul>
+
+      <a href="#" class="navbar__toggleBtn">
+        <i class="fas fa-bars"></i>
+      </a>
+    </nav>
+
+    <article class="main-area__table">
+      <div>
+        <label for="date">날짜 선택</label>
+        <input id="date" class="date-selected" type="date" value="2018-07-22" />
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>학번</th>
+            <th>이름</th>
+            <th>등교시간</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <tr>
+            <td>1</td>
+            <td>21319</td>
+            <td>신은수</td>
+            <td>8:00</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </body>
+</html>

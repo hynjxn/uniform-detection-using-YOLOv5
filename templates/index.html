@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/a434b3ffc3.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../static/javascript/navbar.js" defer></script>
+    <script src="../static/javascript/scanstart.js" defer></script>
+    <script src="../static/javascript/apply.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <i class="fas fa-school"></i>
+        <a href="">OO여고 불량교복 인식 시스템</a>
+      </div>
+      <ul class="navbar__menu">
+        <li><a href="/">홈</a></li>
+        <li><a href="/scanner">스캐너</a></li>
+        <li><a href="/penalty">벌점기록부</a></li>
+        <li><a href="/attendance">출석부</a></li>
+      </ul>
+
+      <a href="#" class="navbar__toggleBtn">
+        <i class="fas fa-bars"></i>
+      </a>
+    </nav>
+    <article class="scan-container">
+      <div class="scan-container__left">
+          <img id="cam" src="{{ url_for('video_feed') }}" alt="Access your cam to detect object" />
+      </div>
+      <div class="scan-container__right">
+        <!--결과 테이블-->
+        <table class="res-table">
+          <thead>
+            <tr>
+              <th>교복 분류</th>
+              <th>퍼센트(%)</th>
+              <th>벌점</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <tr>
+              <td id="class_1">첫번째 칸</td>
+              <td id="per_1">두번째 칸</td>
+              <td id="point_1">세번째 칸</td>
+            </tr>
+            <tr>
+              <td id="class_2">첫번째 칸</td>
+              <td id="per_2">두번째 칸</td>
+              <td id="point_2">세번째 칸</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                총 벌점은 <span id="pointSum">xx</span>점 입니다
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="inputs-buttons">
+          <input type="text" placeholder="학번 입력" id="id_input" />
+          <div class="buttons">
+            <div onclick="scanStart()" class="scan-start__button">
+              사진 촬영
+            </div>
+            <div onclick="DBApply()" class="apply__button">벌점 저장</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>

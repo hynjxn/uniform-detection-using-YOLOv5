@@ -1,0 +1,43 @@
+.main-area__table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  width: 50%;
+  margin: 20px 0px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: center;
+}
+td {
+  border: 1px solid white;
+  font-size: 14px;
+  padding: 10px 10px;
+  word-break: keep-all;
+}
+th {
+  border: 1px solid white;
+  font-size: 14px;
+  padding: 10px 10px;
+  word-break: keep-all;
+}
+thead tr {
+  background-color: #efefef;
+}
+tbody tr:nth-child(even) {
+  background-color: #efefef;
+}
+tbody .tr:nth-child(odd) {
+  background-color: #f7f6f2;
+}
+
+.student-name {
+  cursor: pointer;
+}
+
+.student-name:hover {
+  text-decoration: underline;
+}
