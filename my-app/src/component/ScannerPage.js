@@ -36,7 +36,7 @@ function ScannerPage(props) {
                     background: "pink",
                     marginRight: "30px",
                     borderRadius: "20px"
-                }}>이미지
+                }}><img src={'/video_feed'} style={{width: "100%", height: "100%", borderRadius: "20px"}}/>
 
                 </div>
                 <Right>
