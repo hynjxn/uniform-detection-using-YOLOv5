@@ -3,10 +3,10 @@ import torch
 import yaml
 
 ''' DEFINE MODEL '''
-with open('./model/config/yolov5.yaml') as f:
+with open('./server/model/config/yolov5.yaml') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
-model = torch.hub.load('./model/yolov5',
+model = torch.hub.load('./server/model/yolov5',
                        'custom',
                        path=config['model_param']['path'],
                        source='local')  # local repo

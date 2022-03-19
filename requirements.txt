@@ -1,11 +1,9 @@
 # pip install -r requirements.txt
 
-##### Flask #####
-flask
-pymysql
+# Server ----------------------------------------
+flask==2.0.3
+pymysql==1.0.2
 
-
-##### YOLO v5 #####
 # Base ----------------------------------------
 matplotlib>=3.2.2
 numpy>=1.18.5
@@ -18,7 +16,7 @@ tqdm>=4.41.0
 
 # You should install torch that is correct your device version
 # You can find your version in "https://pytorch.org/"
-# eg. !conda install pytorch torchvision torchaudio cpuonly -c pytorch
+# eg. conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
 # torch>=1.7.0
 # torchvision>=0.8.1
 

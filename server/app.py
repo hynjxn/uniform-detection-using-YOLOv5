@@ -1,10 +1,10 @@
-from flask import Flask, render_template, jsonify, request, Response, send_from_directory
+from flask import Flask, jsonify, request, Response, send_from_directory
 import time
 import pymysql
 import yaml
 import cv2
 import os
-from model.detect import do_detect
+from server.model.detect import do_detect
 import warnings
 warnings.filterwarnings(action='ignore')
 
@@ -17,13 +17,8 @@ with open('info.yaml') as f:
     MYSQL_DB = mysql_config['db']
     MYSQL_CHAR = mysql_config['charset']
 
-    main_config = config['account']['main']
-    MAIN_HOST = main_config['host']
-    MAIN_PORT = main_config['port']
 
-
-
-app = Flask(__name__, static_folder='my-app/build')
+app = Flask(__name__, static_folder='../my-app/build')
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -119,10 +114,6 @@ def del_pen():
 
     return jsonify({'result': 'success', 'msg': '삭제 완료'})
 
-@app.route('/attendance')
-def attendance():
-    return render_template('index4.html')
-
 @app.route('/applyDB', methods=['POST'])
 def applyToDb():
     id_receive = request.form['id_give']
@@ -148,9 +139,3 @@ def applyToDb():
             db.rollback()
 
         return jsonify({'result': 'success', 'pt':new_penalty, 'name':name})
-
-
-
-
-if __name__ == '__main__':
-   app.run(MAIN_HOST, port=MAIN_PORT, debug=True)

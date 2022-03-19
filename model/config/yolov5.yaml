@@ -1,4 +1,0 @@
-model_param:
-  path: ./model/weight/best.pt
-  conf: 0.3
-  iou: 0.2
