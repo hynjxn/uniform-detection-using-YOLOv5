@@ -12,9 +12,9 @@
 ### Members
 ```
 - Jaewoo Park (jerife@naver.com)
-- Eunsu Shin (shsan0324@gmail.com)
+- Hyunjin Lee (shsan0324@gmail.com)
 - Minah Choi (mina7245@gmail.com)
-- Hyunjin Lee (ses2201@g.hongik.ac.kr)
+- Eunsu Shin (ses2201@g.hongik.ac.kr)
 ```
 
 
