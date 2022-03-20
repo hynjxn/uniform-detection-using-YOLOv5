@@ -1,5 +1,5 @@
 # Uniform Detection Using YOLOv5
-[프로젝트 시연영상 or 사진]
+[프로젝트 시연움짤 or 사진]
 
 [프로젝트 설명]
 
@@ -12,10 +12,13 @@
 ### Members
 ```
 - Jaewoo Park (jerife@naver.com)
-- (shsan0324@gmail.com)
-- (mina7245@gmail.com)
-- (ses2201@g.hongik.ac.kr)
+- Eunsu Shin (shsan0324@gmail.com)
+- Minah Choi (mina7245@gmail.com)
+- Hyunjin Lee (ses2201@g.hongik.ac.kr)
 ```
+
+
+
 
 ### Installation with virtual environment
 ```bash
