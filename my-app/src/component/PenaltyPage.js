@@ -10,18 +10,23 @@ import Modal from '@mui/material/Modal';
 import StudentAddForm from "./StudentAddForm";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFloppyDisk, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
 
 function PenaltyPage(props) {
-    const contents = [{
-        student_id: "21319", student_name: "신은수", parent_ph:
-            "010-4710-6207", penalty_points: "-17"
-    }, {
-        student_id: "21320", student_name: "신은수", parent_ph:
-            "010-4710-6207", penalty_points: "-17"
-    }];
+//    const contents = [{
+//        student_id: "21319", student_name: "신은수", parent_ph:
+//            "010-4710-6207", penalty_points: "-17"
+//    }, {
+//        student_id: "21320", student_name: "신은수", parent_ph:
+//            "010-4710-6207", penalty_points: "-17"
+//    }];
 
-    // const [content, setContent] = useState([]);
-
+    const [contents, setContents] = useState([{
+        student_id: "",
+        student_name: "",
+        parent_ph: "",
+        penalty_points: ""
+    }]);
     const [word, setWord] = useState({input: "", select: ""});
     const [currentInfo, setCurrentInfo] = useState({
         student_id: "",
@@ -36,8 +41,14 @@ function PenaltyPage(props) {
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
-        // 학생 불러오기
-        // setContents([{},{}....])
+        // 모든 학생 불러오기 api 호출
+        axios.get("/penalty/list")
+             .then((result)=>{
+                let list = result.data.penalties;
+                //console.log("list : ", list);
+                setContents(list);
+             })
+            .catch(()=>{console.log("fail");})
     }, []);
 
     const handleSearchFormChange = (e) => {
@@ -82,14 +93,34 @@ function PenaltyPage(props) {
 
     const saveStudentFunction = () => {
         if(addOrEdit === "Add"){
-            // 저장 api 요청 함수
+            // 새로운 학생 저장 api 호출
+            axios.post("/penalty/add", currentInfo)
+                .then((result)=>{
+                    if(result.data.result == 'success'){
+                        window.location.reload(); // 정상적으로 db에 저장되면 현재 페이지 새로고침
+                    }
+                })
+                .catch(()=>{console.log("add fail");})
         }
         else if(addOrEdit === "Edit"){
-            // 수정 api 요청 함수
+            // 기존 학생 수정 api 호출
+            axios.post("/penalty/fix", currentInfo)
+                .then((result)=>{
+                    if(result.data.result == 'success'){
+                        window.location.reload();
+                    }
+                })
+                .catch(()=>{console.log("edit fail");})
         }
     }
 
-    const deleteFunction = () => {
+    const deleteFunction = (e) => {
+        if (e.target.getAttribute('name') != null) {
+            setCurrentInfo(contents[parseInt(e.target.getAttribute('name'))])
+        } else {
+            setCurrentInfo(contents[parseInt(e.target.parentNode.getAttribute('name'))])
+        };
+
         Swal.fire({
             title: 'Delete Anyway?',
             icon: 'question',
@@ -99,18 +130,17 @@ function PenaltyPage(props) {
             confirmButtonColor: Style.color1,
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
-                // db에 삭제요청 보내기
-                return fetch(`//api.github.com/users/${login}`)
-                    .then(response => {
-                        //성공 시 삭제되었습니다 swal창
-                    })
-                    .catch(error => {
-                        //실패 시 다시 한번 시도해주세요 swal창
-                    })
+                // 기존 학생 삭제 api 호출
+                axios.post("/penalty/delete", {student_id : currentInfo.student_id})
+                    .then((result)=>{
+                        if(result.data.result == 'success'){
+                            window.location.reload();
+                        }
+                     })
+                    .catch(()=>{console.log("delete fail")})
             },
             allowOutsideClick: () => !Swal.isLoading()
         })
-
     }
 
     return (

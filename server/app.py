@@ -73,24 +73,27 @@ def read_reviews():
 
 
 ''' ########## DB Function ########## '''
-#db = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, password=MYSQL_PW, db=MYSQL_DB, charset=MYSQL_CHAR)
-db = 'a'
+db = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, password=MYSQL_PW, db=MYSQL_DB, charset=MYSQL_CHAR)
+
+# 모든 학생 조회하기
 @app.route('/penalty/list', methods=['GET'])
 def view_pen():
     cursor = db.cursor(pymysql.cursors.DictCursor)
-    sql = "select * from penalty"
+    sql = "SELECT * FROM penalty_table"
     cursor.execute(query=sql)
     result = cursor.fetchall()
     return jsonify({'result': 'success', 'penalties': result})
 
+# 새로운 학생 추가하기
 @app.route('/penalty/add', methods=['POST'])
-def save_pen():
-    id_receive = request.form['id_give']
-    name_receive = request.form['name_give']
-    phone_receive = request.form['phone_give']
-    penalty_receive = request.form['penalty_give']
+def add_pen():
+    id = request.json['student_id']
+    name = request.json['student_name']
+    phone = request.json['parent_ph']
+    penalty = request.json['penalty_points']
+
     cursor = db.cursor()
-    sql = "insert into penalty values("+id_receive+", "+name_receive+", "+phone_receive+", "+penalty_receive+")"
+    sql = "INSERT INTO penalty_table(student_id, student_name, parent_ph, penalty_points) VALUES(\"" +id+ "\", \"" +name+ "\", \"" +phone+ "\", " +penalty+ ");"
     try:
         cursor.execute(sql)
         db.commit()
@@ -98,13 +101,33 @@ def save_pen():
         print(str(e))
         db.rollback()
 
-    return jsonify({'result': 'success', 'msg': '저장 완료'})
+    return jsonify({'result': 'success'})
 
+# 해당 학생 수정하기
+@app.route('/penalty/fix', methods=['POST'])
+def fix_pen():
+    id = request.json['student_id']
+    name = request.json['student_name']
+    phone = request.json['parent_ph']
+    penalty = str(request.json['penalty_points'])
+
+    cursor = db.cursor()
+    sql = "UPDATE penalty_table SET student_id=\"" +id+ "\", student_name=\"" +name+ "\", parent_ph=\"" +phone+ "\", penalty_points=" +penalty+ " WHERE student_id=\"" +id+ "\";"
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except Exception as e:
+        print(str(e))
+        db.rollback()
+
+    return jsonify({'result': 'success'})
+
+# 해당 학생 삭제하기
 @app.route('/penalty/delete', methods=['POST'])
 def del_pen():
-    id_receive = request.form['id_give']
+    id = request.json['student_id']
     cursor = db.cursor()
-    sql="delete from penalty where PEN_STU_ID="+id_receive
+    sql="DELETE FROM penalty_table WHERE student_id= \"" +id+ "\";"
     try:
         cursor.execute(sql)
         db.commit()
@@ -112,7 +135,7 @@ def del_pen():
         print(str(e))
         db.rollback()
 
-    return jsonify({'result': 'success', 'msg': '삭제 완료'})
+    return jsonify({'result': 'success'})
 
 @app.route('/applyDB', methods=['POST'])
 def applyToDb():
