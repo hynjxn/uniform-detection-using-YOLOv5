@@ -162,3 +162,23 @@ def applyToDb():
             db.rollback()
 
         return jsonify({'result': 'success', 'pt':new_penalty, 'name':name})
+
+# 해당 날짜에 출석한 학생 조회하기
+@app.route('/attendance/get', methods=['post'])
+def get_att():
+    date = request.json['attend_date']
+
+    cursor = db.cursor()
+    sql = "select P.student_id, P.student_name, if (A.attend_date IS null, 'X', 'O') AS attendance " \
+          "from penalty_table P " \
+          "left outer join attendance_table A on P.student_id = A.student_id " \
+          "and A.attend_date = date(\"" +date+ "\");"
+    try:
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        db.commit()
+    except Exception as e:
+        print(str(e))
+        db.rollback()
+
+    return jsonify({'result': 'success', 'student_list' : result})

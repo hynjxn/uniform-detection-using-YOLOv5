@@ -3,13 +3,27 @@ import styled from "styled-components";
 import Calendar from 'react-calendar';
 import {Style} from "../Style";
 import CustomCalendar from "./CustomCalendar";
-
+import axios from 'axios';
 
 function AttendancePage(props) {
     const [date, setDate] = useState(new Date());
+    const [contents, setContents] = useState([{
+        student_id: "",
+        student_name: "",
+        attendance : ""
+    }]);
 
     useEffect(() => {
-        console.log(date);
+        const str_date = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate() // ex)2022-3-26
+
+        axios.post("/attendance/get", {attend_date : str_date})
+            .then((result)=>{
+                const list = result.data.student_list;
+                console.log(list)
+                setContents(list);
+            })
+            .catch(()=>{console.log("get attendance fail")})
+
     }, [date])
     return (
         <Main>
@@ -29,27 +43,6 @@ function AttendancePage(props) {
                             <TableCell>신은수 </TableCell>
                             <TableCell>X</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>21320</TableCell>
-                            <TableCell>신은수</TableCell>
-                            <TableCell>O</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>21320</TableCell>
-                            <TableCell>신은수</TableCell>
-                            <TableCell>O</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>21320</TableCell>
-                            <TableCell>신은수</TableCell>
-                            <TableCell>O</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>21320</TableCell>
-                            <TableCell>신은수</TableCell>
-                            <TableCell>O</TableCell>
-                        </TableRow>
-
                     </TableContainer>
                 </Right>
             </MainInner>
