@@ -62,7 +62,7 @@ def gen_frames():
 def video_feed():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/scan', methods=['GET'])
+@app.route('/scanner/scan', methods=['GET'])
 def read_reviews():
     global stop_cam_2sec
     global data_dict
@@ -137,12 +137,13 @@ def del_pen():
 
     return jsonify({'result': 'success'})
 
-@app.route('/applyDB', methods=['POST'])
+# 출석 등록하기
+@app.route('/scanner/add', methods=['POST'])
 def applyToDb():
-    id_receive = request.form['id_give']
-    point_receive = int(request.form['point_give'])
+    id = request.json['student_id']
+    point = int(request.json['point'])
     cursor_1 = db.cursor()
-    sql_1="select PEN_STU_NAME, PENALTY from penalty where PEN_STU_ID="+id_receive
+    sql_1="SELECT student_name, penalty_points FROM penalty_table WHERE student_id=\"" +id+ "\";"
     cursor_1.execute(query=sql_1)
     row = cursor_1.fetchone()
 
@@ -151,9 +152,9 @@ def applyToDb():
     else:
         name = row[0]
         pre_penalty = row[1]
-        new_penalty = str(pre_penalty+point_receive)
+        new_penalty = str(pre_penalty+point)
         cursor_2 = db.cursor()
-        sql_2="update penalty set PENALTY="+new_penalty+" where PEN_STU_ID="+id_receive
+        sql_2="UPDATE penalty_table SET penalty_points=" +new_penalty+ " WHERE student_id=\"" +id+ "\";"
         try:
             cursor_2.execute(sql_2)
             db.commit()

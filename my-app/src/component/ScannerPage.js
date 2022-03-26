@@ -5,24 +5,70 @@ import {Style} from "../Style";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import axios from 'axios';
 
 function ScannerPage(props) {
     const [input, setInput] = useState("");
-
+    const [contents, setContents] = useState({
+        type1: "", percent1: "", penalty1: "",
+        type2: "", percent2: "", penalty2: "",
+        point_sum: ""
+    });
 
     const handleChange = (e) => {
         const {value} = e.target;
         setInput(value);
     }
 
-    // 사진 촬영 요청하고 결과값 가져오는 함수
+    // 사진 촬영 요청하고 결과값 가져오는 api 호출
     const scanFunction = () => {
         //결과값을 setContents로 저장
+        axios.get("/scanner/scan")
+            .then((result)=>{
+                const penalty_map = result.data;
+                let temp_data = {
+                    type1: "", percent1: "", penalty1: "",
+                    type2: "", percent2: "", penalty2: "",
+                    point_sum: ""
+                }
+
+                // 벌점 map
+                const point_map = {
+                    'normal_top' : 0,
+                    'open_top' : -1,
+                    't_shirt' : -5,
+                    'normal_skirt' : 0,
+                    'short_skirt' : -4,
+                    'pants' : -5,
+                    '[DETECT ERROR]: BOTTOM': 0,
+                    '[DETECT ERROR]: TOP': 0
+                }
+
+                let i = 1;
+                let point_sum = 0;
+                for (let key in penalty_map) {
+                    temp_data["type"+i] = key;
+                    temp_data["percent"+i] = penalty_map[key];
+                    temp_data["penalty"+i] = point_map[key];
+                    i ++;
+                }
+                temp_data["point_sum"] = temp_data["penalty1"] + temp_data["penalty2"]
+                setContents(temp_data);
+                console.log(contents);
+            })
     }
 
-    // db에 저장 요청하는 함수
+    // 벌점과 출석 저장하는 api 호출
     const saveFunction = () => {
-
+        axios.post("/scanner/add", {student_id:input, point: contents.point_sum})
+            .then((result)=>{
+                if(result.data.result == "success"){
+                    window.location.reload();
+                }else{
+                    console.log("해당 학번이 없습니다")
+                }
+            })
+            .catch(()=>{console.log("add fail")})
     }
     return (
         <Main>
