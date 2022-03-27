@@ -1,0 +1,7 @@
+account:
+  mysql:
+    host: put_your_host
+    user: put_your_id
+    password: put_your_pw
+    db: put_your_db
+    charset: utf8mb4
