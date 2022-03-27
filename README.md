@@ -8,7 +8,7 @@
 [db구조도]
  
 ---
-## Usage
+
 ### Members
 ```
 - Jaewoo Park (jerife@naver.com)
@@ -19,7 +19,7 @@
 
 
 
-
+## Usage
 ### Installation with virtual environment
 ```bash
 git clone https://github.com/hynjxn/Uniform-Detection-Using-YOLOv5.git
