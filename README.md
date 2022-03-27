@@ -26,7 +26,7 @@ git clone https://github.com/hynjxn/Uniform-Detection-Using-YOLOv5.git
 cd Uniform-Detection-Using-YOLOv5
 
 conda create -n project python=3.9
-activate project
+conda activate project
 
 # PyTorch installation process may vary depending on your hardware (pytorch<=1.9.0)
 conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
