@@ -13,7 +13,7 @@ function CustomButton({content, width, backgroundColor, borderColor, color, onCl
             fontWeight: 600,
             fontFamily: Style.font,
             borderRadius: "20px",
-        }} 청 onClick={onClickFunction}>{content}</Button>
+        }} onClick={onClickFunction}>{content}</Button>
 
     );
 }

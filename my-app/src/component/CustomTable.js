@@ -41,7 +41,7 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
                             <StyledTableCell align="center">{content.student_name}</StyledTableCell>
                             <StyledTableCell align="center">{content.parent_ph}</StyledTableCell>
                             <StyledTableCell align="center">{content.penalty_points}</StyledTableCell>
-                            <StyledTableCell align="center">
+                            <StyledTableCell name={index} align="center">
                                 <DeleteIcon name={index} style={{marginRight: "20px", cursor: "pointer"}} onClick={deleteFunction}/>
                                 <EditIcon name={index} style={{cursor: "pointer"}} onClick={editFunction}/>
                             </StyledTableCell>
