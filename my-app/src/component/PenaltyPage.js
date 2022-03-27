@@ -13,13 +13,13 @@ import {faFloppyDisk, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 
 function PenaltyPage(props) {
-//    const contents = [{
-//        student_id: "21319", student_name: "신은수", parent_ph:
-//            "010-4710-6207", penalty_points: "-17"
-//    }, {
-//        student_id: "21320", student_name: "신은수", parent_ph:
-//            "010-4710-6207", penalty_points: "-17"
-//    }];
+   // const contents = [{
+   //     student_id: "21319", student_name: "신은수", parent_ph:
+   //         "010-4710-6207", penalty_points: "-17"
+   // }, {
+   //     student_id: "21320", student_name: "신은수", parent_ph:
+   //         "010-4710-6207", penalty_points: "-17"
+   // }];
 
     const [contents, setContents] = useState([{
         student_id: "",
@@ -27,7 +27,7 @@ function PenaltyPage(props) {
         parent_ph: "",
         penalty_points: ""
     }]);
-    const [word, setWord] = useState({input: "", select: ""});
+    const [word, setWord] = useState({input: "", select: "student_id"});
     const [currentInfo, setCurrentInfo] = useState({
         student_id: "",
         student_name: "",
@@ -51,6 +51,10 @@ function PenaltyPage(props) {
             .catch(()=>{console.log("fail");})
     }, []);
 
+    useEffect(()=>{
+        console.log(word)
+    },[word])
+
     const handleSearchFormChange = (e) => {
         const {name, value} = e.target;
         setWord({...word, [name]: value});
@@ -66,8 +70,11 @@ function PenaltyPage(props) {
 
     const searchFunction = (e)=>{
         e.preventDefault();
-        // 검색 api 요청을 한다.
-        // setContent(content)
+        axios.post("/penalty/search", {id_or_name: word.select==="student_name"?1:0, student_id_or_name: word.input})
+            .then((result)=> {
+                console.log(result.data)
+            })
+            .catch(()=>{console.log("search fail")})
     }
 
     const clickAddButtonFunction = () => {
@@ -115,6 +122,10 @@ function PenaltyPage(props) {
     }
 
     const deleteFunction = (e) => {
+        console.log(e.target);
+        console.log(e.target.parentNode);
+        console.log(e.target.parentNode.getAttribute('name'));
+
         if (e.target.getAttribute('name') != null) {
             setCurrentInfo(contents[parseInt(e.target.getAttribute('name'))])
         } else {
@@ -131,6 +142,7 @@ function PenaltyPage(props) {
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
                 // 기존 학생 삭제 api 호출
+                console.log(currentInfo)
                 axios.post("/penalty/delete", {student_id : currentInfo.student_id})
                     .then((result)=>{
                         if(result.data.result == 'success'){
