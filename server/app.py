@@ -84,6 +84,24 @@ def view_pen():
     result = cursor.fetchall()
     return jsonify({'result': 'success', 'penalties': result})
 
+# 특정 학생 조회하기
+@app.route('/penalty/search', methods=['POST'])
+def search_pen():
+    idOrName = request.json['id_or_name'] # id = 0, name = 1
+    if (idOrName == 0) :
+        id = request.json['student_id_or_name']
+        cursor = db.cursor(pymysql.cursors.DictCursor)
+        sql = "SELECT * FROM penalty_table WHERE student_id=\"" + id + "\"";
+    elif (idOrName == 1):
+        name = request.json['student_id_or_name']
+        cursor = db.cursor(pymysql.cursors.DictCursor)
+        sql = "SELECT * FROM penalty_table WHERE student_name=\"" + name + "\"";
+
+    cursor.execute(query=sql)
+    result = cursor.fetchall()
+    return jsonify({'result': 'success', 'penalties': result})
+
+
 # 새로운 학생 추가하기
 @app.route('/penalty/add', methods=['POST'])
 def add_pen():
@@ -165,7 +183,7 @@ def applyToDb():
         return jsonify({'result': 'success', 'pt':new_penalty, 'name':name})
 
 # 해당 날짜에 출석한 학생 조회하기
-@app.route('/attendance/get', methods=['post'])
+@app.route('/attendance/get', methods=['POST'])
 def get_att():
     date = request.json['attend_date']
 

@@ -1,0 +1,12 @@
+account:
+  main:
+    ip: 13.125.251.115
+    host: 0.0.0.0
+    port: 5000
+
+  mysql:
+    host: database-1.cnmfv6d2nu3t.ap-northeast-2.rds.amazonaws.com
+    user: root
+    password: 99guswls
+    db: uniform_detection
+    charset: utf8mb4
