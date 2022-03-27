@@ -7,14 +7,11 @@ import axios from 'axios';
 
 function AttendancePage(props) {
     const [date, setDate] = useState(new Date());
-    const [contents, setContents] = useState([{
-        student_id: "",
-        student_name: "",
-        attendance : ""
-    }]);
+    const [contents, setContents] = useState([]);
 
     useEffect(() => {
         const str_date = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate() // ex)2022-3-26
+        console.log(str_date)
 
         axios.post("/attendance/get", {attend_date : str_date})
             .then((result)=>{
@@ -25,6 +22,8 @@ function AttendancePage(props) {
             .catch(()=>{console.log("get attendance fail")})
 
     }, [date])
+
+
     return (
         <Main>
             <MainInner>
@@ -38,11 +37,14 @@ function AttendancePage(props) {
                             <TableCell>Name</TableCell>
                             <TableCell>Attendance</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>21319</TableCell>
-                            <TableCell>신은수 </TableCell>
-                            <TableCell>X</TableCell>
-                        </TableRow>
+                        {contents.length!==0?
+                            contents.map((content)=>{
+                                return  <TableRow>
+                                    {content.map((item)=>{return <TableCell>{item}</TableCell>})}
+                                </TableRow>
+                            }):
+                            null
+                        }
                     </TableContainer>
                 </Right>
             </MainInner>

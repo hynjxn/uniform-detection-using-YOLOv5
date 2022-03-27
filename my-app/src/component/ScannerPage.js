@@ -10,9 +10,9 @@ import axios from 'axios';
 function ScannerPage(props) {
     const [input, setInput] = useState("");
     const [contents, setContents] = useState({
-        type1: "", percent1: "", penalty1: "",
-        type2: "", percent2: "", penalty2: "",
-        point_sum: ""
+        type1: "0", percent1: "0", penalty1: "0",
+        type2: "0", percent2: "0", penalty2: "0",
+        point_sum: "0"
     });
 
     const handleChange = (e) => {
@@ -93,20 +93,20 @@ function ScannerPage(props) {
                             <TableCell>Demerit</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>T-shirt</TableCell>
-                            <TableCell>74.2 </TableCell>
-                            <TableCell>-5</TableCell>
+                            <TableCell>{contents.type1}</TableCell>
+                            <TableCell>{contents.percent1}</TableCell>
+                            <TableCell>{contents.penalty1}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Pants</TableCell>
-                            <TableCell>94.1</TableCell>
-                            <TableCell>-5</TableCell>
+                            <TableCell>{contents.type2}</TableCell>
+                            <TableCell>{contents.percent2}</TableCell>
+                            <TableCell>{contents.penalty2}</TableCell>
                         </TableRow>
                         <div style={{
                             color: "white",
                             fontSize: 26,
                             marginTop: 20
-                        }}>Total Demerit: -10
+                        }}>Total Demerit: {contents.point_sum}
                         </div>
                     </TableContainer>
                     <RightBottom>
