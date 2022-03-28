@@ -66,7 +66,7 @@ def video_feed():
 def read_reviews():
     global stop_cam_2sec
     global data_dict
-
+    print(data_dict)
     return jsonify(data_dict)
 
 
