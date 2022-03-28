@@ -31,10 +31,16 @@ conda activate project
 # PyTorch installation process may vary depending on your hardware (pytorch<=1.9.0)
 conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
 pip install -r requirements.txt
+
+# Edit info.yaml to connect with your DB
+vim info.yaml
 ```
 
-### Run with gunicorn
+### Run
 ```bash
-# gunicorn --bind [Host IP]:[Port] wsgi:app
+# Run with gunicorn
+python wsgi.py 
+
+# Run with gunicorn
 gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```
