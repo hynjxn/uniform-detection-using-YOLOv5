@@ -28,7 +28,6 @@ def do_detect(img):
         'normal_top': (255, 0, 0), # Blue
     }
 
-
     best_score_top = 0
     best_score_bottom = 0
     best_name_top = None
@@ -37,7 +36,6 @@ def do_detect(img):
     for idx, df in preds_df.iterrows():
         score = round(float(df['confidence'])*100,2)
         class_name = df['name']
-        print("class_name:",class_name)
 
         # 상의 예측값
         if class_name in ['t_shirt', 'open_top', 'normal_top']:
@@ -52,7 +50,6 @@ def do_detect(img):
         else:
             if best_score_bottom<score:
                 best_score_bottom = score
-                best_index_bottom = idx
                 best_name_bottom = class_name
                 bottom_x1 = int(df['xmin'])
                 bottom_y1 = int(df['ymin'])
