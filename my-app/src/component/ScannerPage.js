@@ -44,10 +44,22 @@ function ScannerPage(props) {
                     '[DETECT ERROR]: TOP': 0
                 }
 
+                // 출력시킬 이름
+                const output_map = {
+                    'normal_top' : 'Uniform Shirt',
+                    'open_top' : 'Open Shirt',
+                    't_shirt' : 'T Shirt',
+                    'normal_skirt' : 'Uniform Skirt',
+                    'short_skirt' : 'Short Skirt',
+                    'pants' : 'Pants',
+                    '[DETECT ERROR]: BOTTOM': "No Bottom",
+                    '[DETECT ERROR]: TOP': "No Top"
+                }
+
                 let i = 1;
                 let point_sum = 0;
                 for (let key in penalty_map) {
-                    temp_data["type"+i] = key;
+                    temp_data["type"+i] = output_map[key];
                     temp_data["percent"+i] = penalty_map[key];
                     temp_data["penalty"+i] = point_map[key];
                     i ++;
