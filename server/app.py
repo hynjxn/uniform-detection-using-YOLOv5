@@ -8,7 +8,7 @@ from server.model.detect import do_detect
 import warnings
 warnings.filterwarnings(action='ignore')
 
-with open('info.yaml') as f:
+with open('././info.yaml') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
     mysql_config = config['account']['mysql']
     MYSQL_HOST = mysql_config['host']
