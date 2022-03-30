@@ -114,7 +114,7 @@
 //
 // export default Navigation;
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -123,8 +123,6 @@ import {Style} from "../Style";
 
 function Navigation() {
     let a = document.location.pathname.replace("/", "")
-    console.log(a)
-
     const [selected, setSelected] = useState(() => {
         if (a === "") {
             return "scanner"
@@ -140,7 +138,8 @@ function Navigation() {
 
     return (
         <div style={{
-            height: "100px",
+            height: "10%",
+            maxHeight: "85px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -167,7 +166,7 @@ function Navigation() {
                         marginRight: "10px"
                     }} onClick={onClickFunction} name="scanner">
                         <FontAwesomeIcon name="scanner" onClick={onClickFunction} icon={faSchool}
-                                         style={{fontSize: "20px", color: "white"}}/>
+                                         style={{fontSize:"25px", color: "white"}}/>
                     </div>
                     <div name="scanner" onClick={onClickFunction} style={{
                         fontSize: "25px",
@@ -186,7 +185,8 @@ function Navigation() {
                     <StyledMenu name="scanner"
                                 style={{
                                     backgroundColor: `${selected === "scanner" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
-                                    color: "white"
+                                    color: "white",
+                                    fontSize: window.innerWidth<1700?"18px": "25px"
                                 }}
                     >Scanner</StyledMenu>
                 </StyledLink>
@@ -195,6 +195,8 @@ function Navigation() {
                                 style={{
                                     backgroundColor: `${selected === "penalty" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
                                     color: "white",
+                                    fontSize: window.innerWidth<1700?"18px": "25px"
+
                                 }}
                     >School Record</StyledMenu>
                 </StyledLink>
@@ -202,7 +204,9 @@ function Navigation() {
                     <StyledMenu name="attendance"
                                 style={{
                                     backgroundColor: `${selected === "attendance" ? "rgba(255, 255, 255, 0.3)" : "transparent"}`,
-                                    color: "white"
+                                    color: "white",
+                                    fontSize: window.innerWidth<1700?"18px": "25px"
+
                                 }}
                     >Attendance</StyledMenu>
                 </StyledLink>

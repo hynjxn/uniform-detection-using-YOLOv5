@@ -21,12 +21,7 @@ function PenaltyPage(props) {
     //         "010-4710-6207", penalty_points: "-17"
     // }];
 
-    const [contents, setContents] = useState([{
-        student_id: "",
-        student_name: "",
-        parent_ph: "",
-        penalty_points: ""
-    }]);
+    const [contents, setContents] = useState([]);
     const [word, setWord] = useState({input: "", select: "student_id"});
     const [currentInfo, setCurrentInfo] = useState({
         student_id: "",
@@ -156,7 +151,6 @@ function PenaltyPage(props) {
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
                 // 기존 학생 삭제 api 호출
-
                 axios.post("/penalty/delete", {student_id: tmp.student_id})
                     .then((result) => {
                         if (result.data.result == 'success') {
@@ -179,21 +173,24 @@ function PenaltyPage(props) {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "80%",
-                position: "relative"
+                minWidth: 600,
+                position: "relative",
             }}>
+                <div style={{width: "25%"}}></div>
                 <CustomInput type="penaltyInput" width="50%" onSearchFunction={searchFunction}
                              onChangeFunction={handleSearchFormChange}
                              input={word.input}
                              select={word.select}/>
-                <div style={{position: "absolute", right: "13%"}}><CustomButton width="auto" content={
-                    <>
-                        <FontAwesomeIcon name="scanner" icon={faUserPlus} color="white"
-                                         style={{fontSize: 20, marginRight: "10"}}/>
-                        <span style={{fontSize: 18}}>Add</span>
-                    </>
-                }
-                                                                                onClickFunction={clickAddButtonFunction}
-                                                                                backgroundColor={Style.color1}/>
+                <div style={{width: "25%", marginLeft: "20px"}}>
+                    <CustomButton width="auto" content={
+                        <>
+                            <FontAwesomeIcon name="scanner" icon={faUserPlus} color="white"
+                                             style={{fontSize: 20, marginRight: "10"}}/>
+                            <span style={{fontSize: 18}}>Add</span>
+                        </>
+                    }
+                                  onClickFunction={clickAddButtonFunction}
+                                  backgroundColor={Style.color1}/>
                 </div>
             </div>
             <CustomTable type="penaltyTable" contents={contents} deleteFunction={deleteFunction}
@@ -216,13 +213,13 @@ function PenaltyPage(props) {
 const Main = styled.div`
   width: 100%;
   height: 80vh;
+    min-height:470px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 
 const style = {

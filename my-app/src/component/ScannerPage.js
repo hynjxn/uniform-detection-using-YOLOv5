@@ -82,6 +82,8 @@ function ScannerPage(props) {
             })
             .catch(()=>{console.log("add fail")})
     }
+
+    useEffect(()=>{console.log(window.innerHeight)},[window.innerHeight])
     return (
         <Main>
             <div style={{fontSize: "60px", color: Style.color2, fontWeight: "bold",}}>
@@ -91,9 +93,8 @@ function ScannerPage(props) {
                 <div style={{
                     width: "45%",
                     height: "100%",
-                    background: "pink",
                     marginRight: "30px",
-                    borderRadius: "20px"
+                    borderRadius: "20px",
                 }}><img src={'/video_feed'} style={{width: "100%", height: "100%", borderRadius: "20px"}}/>
 
                 </div>
@@ -157,8 +158,9 @@ export default ScannerPage;
 const Main = styled.div`
   width: 100%;
   height: 80vh;
+  min-height:470px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -170,9 +172,10 @@ const MainInner = styled.div`
   display: flex;
   width: 93%;
   height: 75%;
+  min-height: 270px;
   background-color: ${Style.color3};
   border-radius: 20px;
-  padding: 40px 0px;
+  padding: 30px 0px;
   justify-content: center;
   align-items: center;
 `;
@@ -188,6 +191,7 @@ const Right = styled.div`
 const TableContainer = styled.div`
   width: 100%;
   height: 65%;
+  min-height:150px;
   background-color: ${Style.color2};
   border-radius: 20px;
   margin-bottom: 20px;
@@ -216,6 +220,7 @@ const TableCell = styled.div`
 const RightBottom = styled.div`
   width: 100%;
   height: 55%;
+  min-height:120px;
   background-color: white;
   border-radius: 20px;
   display: flex;
