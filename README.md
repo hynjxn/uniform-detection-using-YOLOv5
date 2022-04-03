@@ -45,8 +45,10 @@ ii) 여름에 입는 하계복만 고려<br/>
 
 ### ERD
 <div align="center">
-    <img alt="image" src="https://user-images.githubusercontent.com/68190553/160404256-b3197ffb-cae6-4ead-ab35-ab9b25a02469.png" width="25%">
+    <img alt="image" src="https://user-images.githubusercontent.com/94098910/161419628-909d6ab5-2efc-45ad-a27d-37d4c7d908d1.png" width="35%">
 </div>
+
+
 
 ### Model Performance
 <div align="center">
