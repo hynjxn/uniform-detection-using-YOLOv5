@@ -90,12 +90,18 @@ def search_pen():
     idOrName = request.json['id_or_name'] # id = 0, name = 1
     if (idOrName == 0) :
         id = request.json['student_id_or_name']
+        if (id == "") :
+            sql = "SELECT * FROM penalty_table"
+        else :
+            sql = "SELECT * FROM penalty_table WHERE student_id=\"" + id + "\""
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = "SELECT * FROM penalty_table WHERE student_id=\"" + id + "\"";
     elif (idOrName == 1):
         name = request.json['student_id_or_name']
+        if (name == "") :
+            sql = "SELECT * FROM penalty_table"
+        else :
+            sql = "SELECT * FROM penalty_table WHERE student_name=\"" + name + "\""
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = "SELECT * FROM penalty_table WHERE student_name=\"" + name + "\"";
 
     cursor.execute(query=sql)
     result = cursor.fetchall()
