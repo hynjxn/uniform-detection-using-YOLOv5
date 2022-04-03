@@ -13,14 +13,6 @@ import {faFloppyDisk, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 
 function PenaltyPage(props) {
-    // const contents = [{
-    //     student_id: "21319", student_name: "신은수", parent_ph:
-    //         "010-4710-6207", penalty_points: "-17"
-    // }, {
-    //     student_id: "21320", student_name: "신은수", parent_ph:
-    //         "010-4710-6207", penalty_points: "-17"
-    // }];
-
     const [contents, setContents] = useState([]);
     const [word, setWord] = useState({input: "", select: "student_id"});
     const [currentInfo, setCurrentInfo] = useState({
@@ -44,7 +36,13 @@ function PenaltyPage(props) {
                 setContents(list);
             })
             .catch(() => {
-                console.log("fail");
+                Swal.fire({
+                    icon: "error",
+                    title:"Load Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
             })
     }, []);
 
@@ -72,10 +70,16 @@ function PenaltyPage(props) {
             student_id_or_name: word.input
         })
             .then((result) => {
-                console.log(result.data)
+                setContents(result.data.penalties)
             })
             .catch(() => {
-                console.log("search fail")
+                Swal.fire({
+                    icon: "error",
+                    title:"Search Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
             })
     }
 
@@ -110,7 +114,13 @@ function PenaltyPage(props) {
                     }
                 })
                 .catch(() => {
-                    console.log("add fail");
+                   Swal.fire({
+                       icon: "error",
+                       title:"Save Fail.",
+                       text: "Try Again Please",
+                       confirmButtonText: 'OK',
+                       confirmButtonColor: Style.color1,
+                   })
                 })
         } else if (addOrEdit === "Edit") {
             // 기존 학생 수정 api 호출
@@ -121,7 +131,13 @@ function PenaltyPage(props) {
                     }
                 })
                 .catch(() => {
-                    console.log("edit fail");
+                    Swal.fire({
+                        icon: "error",
+                        title:"Edit Fail.",
+                        text: "Try Again Please",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: Style.color1,
+                    })
                 })
         }
     }
@@ -158,7 +174,13 @@ function PenaltyPage(props) {
                         }
                     })
                     .catch(() => {
-                        console.log("delete fail")
+                        Swal.fire({
+                            icon: "error",
+                            title:"Delete Fail.",
+                            text: "Try Again Please",
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: Style.color1,
+                        })
                     })
             },
             allowOutsideClick: () => !Swal.isLoading()

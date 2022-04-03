@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 function ScannerPage(props) {
     const [input, setInput] = useState("");
@@ -80,10 +81,17 @@ function ScannerPage(props) {
                     console.log("해당 학번이 없습니다")
                 }
             })
-            .catch(()=>{console.log("add fail")})
+            .catch(()=>{
+                Swal.fire({
+                    icon: "error",
+                    title:"Add Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
+            })
     }
 
-    useEffect(()=>{console.log(window.innerHeight)},[window.innerHeight])
     return (
         <Main>
             <div style={{fontSize: "60px", color: Style.color2, fontWeight: "bold",}}>

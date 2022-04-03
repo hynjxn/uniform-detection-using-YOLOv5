@@ -54,8 +54,7 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
 
                         :
                         <StyledTableRow>
-                            <TableCell colSpan="6" style={{textAlign:"center"}}>No Data.
-                                Please Add Students
+                            <TableCell colSpan="6" style={{textAlign:"center"}}>No Data
                             </TableCell>
                         </StyledTableRow>
                     }
