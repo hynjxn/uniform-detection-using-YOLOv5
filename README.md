@@ -123,7 +123,7 @@ $ pip install -r requirements.txt
 # Edit info.yaml to connect with your DB
 $ vim info.yaml
 ```
-You can set info.yamlas follow:
+You can set info.yaml as follow:
 
 ```yaml
 account:
