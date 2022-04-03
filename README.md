@@ -76,25 +76,36 @@ ii) 여름에 입는 하계복만 고려<br/>
 ## Usage
 ### Installation with virtual environment
 ```bash
-git clone https://github.com/hynjxn/Uniform-Detection-Using-YOLOv5.git
-cd Uniform-Detection-Using-YOLOv5
+$ git clone https://github.com/hynjxn/Uniform-Detection-Using-YOLOv5.git
+$ cd Uniform-Detection-Using-YOLOv5
 
-conda create -n project python=3.9
-conda activate project
+$ conda create -n project python=3.9
+$ conda activate project
 
 # PyTorch installation process may vary depending on your hardware (1.7.0 <= pytorch <= 1.9.0)
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
-pip install -r requirements.txt
+$ conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
+$ pip install -r requirements.txt
 
 # Edit info.yaml to connect with your DB
-vim info.yaml
+$ vim info.yaml
+```
+You can set info.yamlas follow:
+
+```yaml
+account:
+  mysql:
+    host: put your DB host
+    user: put your id
+    password: put your PW
+    db: put your DB name
+    charset: utf8mb4
 ```
 
 ### Run
 ```bash
 # Run with python
-python wsgi.py 
+$ python wsgi.py 
 
 # Run with gunicorn
-gunicorn --bind 0.0.0.0:5000 wsgi:app
+$ gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```
