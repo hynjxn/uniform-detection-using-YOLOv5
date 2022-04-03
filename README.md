@@ -8,7 +8,8 @@
 <div align="center">
     <img width="1918" alt="Detect your uniform" src="https://user-images.githubusercontent.com/68190553/160402942-e435c674-b434-4c7c-bf73-c117628469ec.png" width="100%"/><br/><br/>
 </div>
-Korean schools have rules for wearing neat school uniforms to school.However, some students go to school wearing school uniforms that are not neat or mended.Therefore, in Korean schools, student instructors often give penalty points to students who do not wear neat school uniforms.<br/>
+Korean schools have rules for wearing neat school uniforms to school.However, some students go to school wearing school uniforms that are not neat or mended.Therefore, in Korean schools, student instructors often give penalty points to students who do not wear neat school uniforms.<br/><br/>
+
 We decided that this process was very subjective and wasted manpower, so we planned this project to replace it with the role of artificial intelligence.
 This project not only proposes artificial intelligence that replaces the role of the student instructor, but also proposes a service that can manage penalty points and attendance.
 <br/> <br/>
@@ -37,7 +38,7 @@ ii) 여름에 입는 하계복만 고려<br/>
 ---
 
 ## Documentation
-### Porejct Architecture 
+### Proejct Structure
 <div align="center">
     <img src="https://user-images.githubusercontent.com/68190553/160403502-05b1bdec-b951-47bc-b4d5-60b82d7f8f17.png" width="80%"/>
 </div>
