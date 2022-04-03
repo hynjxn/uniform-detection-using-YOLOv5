@@ -67,12 +67,44 @@ ii) 여름에 입는 하계복만 고려<br/>
 </details>
 
 ### Members
+
+<table>
+  <tr>
+    <td align="center">
+        <a href="https://github.com/jerife">
+            <img src="https://user-images.githubusercontent.com/68190553/161420117-a4c01c9f-7ac0-4c18-a364-974df1574272.png" width="100px;" alt=""/>
+            <br /><sub><b>Jaewoo Park</b></sub></a>
+        </a>
+      </td>
+    <td align="center">
+        <a href="https://github.com/hynjxn">
+            <img src="https://user-images.githubusercontent.com/68190553/161420461-1067b26a-70af-4121-9024-70f8bb598b22.png" width="100px;" alt=""/>
+            <br /><sub><b>Hyunjin Lee</b></sub></a>
+        </a>
+      </td>
+    <td align="center">
+        <a href="https://github.com/minah9999">
+            <img src="https://user-images.githubusercontent.com/68190553/161420485-71dca094-b38a-43c4-b201-f63b86dce1fe.png" width="100px;" alt=""/>
+            <br /><sub><b>Minah Choi</b></sub></a>
+        </a>
+      </td>
+    <td align="center">
+        <a href="https://github.com/ShinEun9">
+            <img src="https://user-images.githubusercontent.com/68190553/161420487-b376ab34-6b2f-46c6-a7ac-5ca659d91eb9.jpeg" width="100px;" alt=""/>
+            <br /><sub><b>Eunsu Shin</b></sub></a>
+        </a>
+      </td>
+</table>
+
+
+
 ```
 - Jaewoo Park (jerife@naver.com)
 - Hyunjin Lee (shsan0324@gmail.com)
 - Minah Choi (mina7245@gmail.com)
 - Eunsu Shin (ses2201@g.hongik.ac.kr)
 ```
+
 ---
 
 ## Usage
