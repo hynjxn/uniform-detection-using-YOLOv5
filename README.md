@@ -90,7 +90,7 @@ ii) 여름에 입는 하계복만 고려<br/>
       </td>
     <td align="center">
         <a href="https://github.com/ShinEun9">
-            <img src="https://user-images.githubusercontent.com/68190553/161420487-b376ab34-6b2f-46c6-a7ac-5ca659d91eb9.jpeg" width="100px;" alt=""/>
+            <img src="https://user-images.githubusercontent.com/68190553/161420569-30e9f979-8ab4-4772-9066-324a5f310fbf.png" width="100px;" alt=""/>
             <br /><sub><b>Eunsu Shin</b></sub></a>
         </a>
       </td>
