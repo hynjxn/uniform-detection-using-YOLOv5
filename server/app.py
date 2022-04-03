@@ -100,7 +100,8 @@ def search_pen():
         if (name == "") :
             sql = "SELECT * FROM penalty_table"
         else :
-            sql = "SELECT * FROM penalty_table WHERE student_name=\"" + name + "\""
+            sql = "SELECT * FROM penalty_table WHERE student_name LIKE concat('%','" +name+ "','%')"
+            print(sql)
         cursor = db.cursor(pymysql.cursors.DictCursor)
 
     cursor.execute(query=sql)
