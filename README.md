@@ -6,7 +6,7 @@
 </div>
 
 <div align="center">
-    <img width="1918" alt="Detect your uniform" src="https://user-images.githubusercontent.com/68190553/160402942-e435c674-b434-4c7c-bf73-c117628469ec.png" width="100%"/><br/><br/>
+    <img alt="Detect your uniform" src="https://user-images.githubusercontent.com/68190553/161419129-009cbce5-6169-4fcc-80ce-34b66f3661aa.png" width="80%"/><br/><br/>
 </div>
 Korean schools have rules for wearing neat school uniforms to school.However, some students go to school wearing school uniforms that are not neat or mended.Therefore, in Korean schools, student instructors often give penalty points to students who do not wear neat school uniforms.<br/><br/>
 
@@ -40,7 +40,7 @@ ii) 여름에 입는 하계복만 고려<br/>
 ## Documentation
 ### Proejct Structure
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/68190553/160403502-05b1bdec-b951-47bc-b4d5-60b82d7f8f17.png" width="80%"/>
+    <img src="https://user-images.githubusercontent.com/68190553/161418538-3f6b0638-cbf1-4b7c-ada9-0c8fbd3a0ac6.png" width="80%"/>
 </div>
 
 ### ERD
