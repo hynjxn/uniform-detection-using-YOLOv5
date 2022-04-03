@@ -17,7 +17,7 @@
 
 .App{
     font-family: var(--font);
-
+    min-height: 600px;
 }
 body{
     margin:0;

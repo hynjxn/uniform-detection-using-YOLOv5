@@ -13,20 +13,7 @@ import {faFloppyDisk, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 
 function PenaltyPage(props) {
-    // const contents = [{
-    //     student_id: "21319", student_name: "신은수", parent_ph:
-    //         "010-4710-6207", penalty_points: "-17"
-    // }, {
-    //     student_id: "21320", student_name: "신은수", parent_ph:
-    //         "010-4710-6207", penalty_points: "-17"
-    // }];
-
-    const [contents, setContents] = useState([{
-        student_id: "",
-        student_name: "",
-        parent_ph: "",
-        penalty_points: ""
-    }]);
+    const [contents, setContents] = useState([]);
     const [word, setWord] = useState({input: "", select: "student_id"});
     const [currentInfo, setCurrentInfo] = useState({
         student_id: "",
@@ -49,7 +36,13 @@ function PenaltyPage(props) {
                 setContents(list);
             })
             .catch(() => {
-                console.log("fail");
+                Swal.fire({
+                    icon: "error",
+                    title:"Load Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
             })
     }, []);
 
@@ -77,10 +70,16 @@ function PenaltyPage(props) {
             student_id_or_name: word.input
         })
             .then((result) => {
-                console.log(result.data)
+                setContents(result.data.penalties)
             })
             .catch(() => {
-                console.log("search fail")
+                Swal.fire({
+                    icon: "error",
+                    title:"Search Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
             })
     }
 
@@ -115,7 +114,13 @@ function PenaltyPage(props) {
                     }
                 })
                 .catch(() => {
-                    console.log("add fail");
+                   Swal.fire({
+                       icon: "error",
+                       title:"Save Fail.",
+                       text: "Try Again Please",
+                       confirmButtonText: 'OK',
+                       confirmButtonColor: Style.color1,
+                   })
                 })
         } else if (addOrEdit === "Edit") {
             // 기존 학생 수정 api 호출
@@ -126,7 +131,13 @@ function PenaltyPage(props) {
                     }
                 })
                 .catch(() => {
-                    console.log("edit fail");
+                    Swal.fire({
+                        icon: "error",
+                        title:"Edit Fail.",
+                        text: "Try Again Please",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: Style.color1,
+                    })
                 })
         }
     }
@@ -156,7 +167,6 @@ function PenaltyPage(props) {
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
                 // 기존 학생 삭제 api 호출
-
                 axios.post("/penalty/delete", {student_id: tmp.student_id})
                     .then((result) => {
                         if (result.data.result == 'success') {
@@ -164,7 +174,13 @@ function PenaltyPage(props) {
                         }
                     })
                     .catch(() => {
-                        console.log("delete fail")
+                        Swal.fire({
+                            icon: "error",
+                            title:"Delete Fail.",
+                            text: "Try Again Please",
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: Style.color1,
+                        })
                     })
             },
             allowOutsideClick: () => !Swal.isLoading()
@@ -179,21 +195,24 @@ function PenaltyPage(props) {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "80%",
-                position: "relative"
+                minWidth: 600,
+                position: "relative",
             }}>
+                <div style={{width: "25%"}}></div>
                 <CustomInput type="penaltyInput" width="50%" onSearchFunction={searchFunction}
                              onChangeFunction={handleSearchFormChange}
                              input={word.input}
                              select={word.select}/>
-                <div style={{position: "absolute", right: "13%"}}><CustomButton width="auto" content={
-                    <>
-                        <FontAwesomeIcon name="scanner" icon={faUserPlus} color="white"
-                                         style={{fontSize: 20, marginRight: "10"}}/>
-                        <span style={{fontSize: 18}}>Add</span>
-                    </>
-                }
-                                                                                onClickFunction={clickAddButtonFunction}
-                                                                                backgroundColor={Style.color1}/>
+                <div style={{width: "25%", marginLeft: "20px"}}>
+                    <CustomButton width="auto" content={
+                        <>
+                            <FontAwesomeIcon name="scanner" icon={faUserPlus} color="white"
+                                             style={{fontSize: 20, marginRight: "10"}}/>
+                            <span style={{fontSize: 18}}>Add</span>
+                        </>
+                    }
+                                  onClickFunction={clickAddButtonFunction}
+                                  backgroundColor={Style.color1}/>
                 </div>
             </div>
             <CustomTable type="penaltyTable" contents={contents} deleteFunction={deleteFunction}
@@ -216,13 +235,13 @@ function PenaltyPage(props) {
 const Main = styled.div`
   width: 100%;
   height: 80vh;
+    min-height:470px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 
 const style = {

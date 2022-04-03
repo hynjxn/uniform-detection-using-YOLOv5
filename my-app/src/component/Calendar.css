@@ -14,6 +14,7 @@
     font-family: var(--font);
     text-underline: none;
     line-height: 10px;
+    height: 100%;
 
 }
 
@@ -24,6 +25,14 @@
 .react-calendar--doubleView .react-calendar__viewContainer {
     display: flex;
     margin: -0.5em;
+    height: 85%;
+}
+
+.react-calendar__viewContainer{
+    height: 85%;
+}
+.react-calendar__month-view{
+    height: 100%;
 }
 
 .react-calendar--doubleView .react-calendar__viewContainer > * {
@@ -56,9 +65,7 @@
     grid-template-columns: 1fr 3fr 1fr;
     justify-content: space-between;
     align-items: center;
-    height: auto;
-    margin-bottom: 20px;
-    padding-bottom: 5px;
+    height: 15%;
 }
 .react-calendar__navigation__arrow{
     display:flex;
@@ -101,7 +108,19 @@
     text-transform: uppercase;
     font-weight: 500;
     font-size: 20px;
+    height: 10%;
+}
 
+.react-calendar__month-view >div{
+    height: 100%;
+}
+
+.react-calendar__month-view >div >div{
+    height: 100%;
+}
+
+.react-calendar__month-view__days{
+    height: 90%;
 }
 
 .react-calendar__month-view__weekdays__weekday {
@@ -141,7 +160,6 @@ abbr{
 .react-calendar__tile {
     max-width: 100%;
     text-align: center;
-    padding: 15px;
     background: none;
     border-radius: 30px;
 }
