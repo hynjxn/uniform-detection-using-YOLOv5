@@ -79,7 +79,7 @@ db = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, password=MYSQL_PW, db=MYS
 @app.route('/penalty/list', methods=['GET'])
 def view_pen():
     cursor = db.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT * FROM penalty_table"
+    sql = "SELECT * FROM penalty_table order by student_id asc"
     cursor.execute(query=sql)
     result = cursor.fetchall()
     return jsonify({'result': 'success', 'penalties': result})
@@ -91,17 +91,16 @@ def search_pen():
     if (idOrName == 0) :
         id = request.json['student_id_or_name']
         if (id == "") :
-            sql = "SELECT * FROM penalty_table"
+            sql = "SELECT * FROM penalty_table order by student_id asc"
         else :
-            sql = "SELECT * FROM penalty_table WHERE student_id=\"" + id + "\""
+            sql = "SELECT * FROM penalty_table WHERE student_id=\"" + id + "\" order by student_id asc"
         cursor = db.cursor(pymysql.cursors.DictCursor)
     elif (idOrName == 1):
         name = request.json['student_id_or_name']
         if (name == "") :
-            sql = "SELECT * FROM penalty_table"
+            sql = "SELECT * FROM penalty_table order by student_id asc"
         else :
-            sql = "SELECT * FROM penalty_table WHERE student_name LIKE concat('%','" +name+ "','%')"
-            print(sql)
+            sql = "SELECT * FROM penalty_table WHERE student_name LIKE concat('%','" +name+ "','%') order by student_id asc"
         cursor = db.cursor(pymysql.cursors.DictCursor)
 
     cursor.execute(query=sql)
@@ -198,7 +197,7 @@ def get_att():
     sql = "select P.student_id, P.student_name, if (A.attend_date IS null, 'X', 'O') AS attendance " \
           "from penalty_table P " \
           "left outer join attendance_table A on P.student_id = A.student_id " \
-          "and A.attend_date = date(\"" +date+ "\");"
+          "and A.attend_date = date(\"" +date+ "\") order by P.student_id asc;"
     try:
         cursor.execute(sql)
         result = cursor.fetchall()
