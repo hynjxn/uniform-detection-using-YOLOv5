@@ -2,7 +2,7 @@
 
 <div align="center">
     <img src="https://user-images.githubusercontent.com/68190553/160357007-8491d572-6e1c-47a5-9c5b-37ffdb9db4cb.png" width="40%"/><br/><br/>
-<h2 align=center>This repo is a project to detect students bad uniforms using YOLOv5 🚀</h2>
+<h2 align=center>This repo is a project to detect students inappropriate uniforms using YOLOv5 🚀</h2>
 </div>
 
 <div align="center">
