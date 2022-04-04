@@ -167,7 +167,7 @@ def applyToDb():
     id = request.json['student_id']
     point = int(request.json['point'])
     cursor_1 = db.cursor()
-    sql_1="SELECT student_name, penalty_points FROM penalty_table WHERE student_id=\"" +id+ "\";"
+    sql_1 = "SELECT student_name, penalty_points FROM penalty_table WHERE student_id=\"" +id+ "\";"
     cursor_1.execute(query=sql_1)
     row = cursor_1.fetchone()
 
@@ -178,9 +178,15 @@ def applyToDb():
         pre_penalty = row[1]
         new_penalty = str(pre_penalty+point)
         cursor_2 = db.cursor()
-        sql_2="UPDATE penalty_table SET penalty_points=" +new_penalty+ " WHERE student_id=\"" +id+ "\";"
+        cursor_3 = db.cursor()
+        sql_2 = "UPDATE penalty_table SET penalty_points=" +new_penalty+ " WHERE student_id=\"" +id+ "\";"
+        sql_3 = "INSERT INTO attendance_table(student_id, attend_date, student_name) " \
+                "select \"" +id+ "\", date_format(now(), '%Y-%m-%d'), \"" +name+ "\" " \
+                "from dual " \
+                "where not exists (select * from attendance_table where student_id=\"" +id+ "\" and attend_date=date_format(now(), '%Y-%m-%d'))"
         try:
             cursor_2.execute(sql_2)
+            cursor_3.execute(sql_3)
             db.commit()
         except Exception as e:
             print(str(e))
