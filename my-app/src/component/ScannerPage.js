@@ -67,7 +67,7 @@ function ScannerPage(props) {
                 }
                 temp_data["point_sum"] = temp_data["penalty1"] + temp_data["penalty2"]
                 setContents(temp_data);
-                console.log(contents);
+                //console.log(contents);
             })
     }
 
@@ -78,7 +78,7 @@ function ScannerPage(props) {
                 if(result.data.result == "success"){
                     window.location.reload();
                 }else{
-                    console.log("해당 학번이 없습니다")
+                    //console.log("해당 학번이 없습니다")
                 }
             })
             .catch(()=>{

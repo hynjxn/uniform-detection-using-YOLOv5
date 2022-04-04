@@ -11,12 +11,12 @@ function AttendancePage(props) {
 
     useEffect(() => {
         const str_date = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate() // ex)2022-3-26
-        console.log(str_date)
+        //console.log(str_date)
 
         axios.post("/attendance/get", {attend_date : str_date})
             .then((result)=>{
                 const list = result.data.student_list;
-                console.log(list)
+                //console.log(list)
                 setContents(list);
             })
             .catch(()=>{console.log("get attendance fail")})

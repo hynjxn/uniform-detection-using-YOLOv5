@@ -132,7 +132,7 @@ function Navigation() {
     });
 
     const onClickFunction = (event) => {
-        console.dir(event.target);
+        //console.dir(event.target);
         setSelected(event.target.getAttribute('name'));
     }
 

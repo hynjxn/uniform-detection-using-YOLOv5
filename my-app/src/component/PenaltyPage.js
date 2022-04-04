@@ -47,7 +47,7 @@ function PenaltyPage(props) {
     }, []);
 
     useEffect(() => {
-        console.log(word)
+        //console.log(word)
     }, [word])
 
     const handleSearchFormChange = (e) => {
@@ -143,9 +143,9 @@ function PenaltyPage(props) {
     }
 
     const deleteFunction = (e) => {
-        console.log(e.target);
-        console.log(e.target.parentNode);
-        console.log(e.target.parentNode.getAttribute('name'));
+        //console.log(e.target);
+        //console.log(e.target.parentNode);
+        //console.log(e.target.parentNode.getAttribute('name'));
 
         let tmp;
         if (e.target.getAttribute('name') != null) {
@@ -155,8 +155,8 @@ function PenaltyPage(props) {
         }
         ;
 
-        console.log(tmp)
-        console.log(tmp.student_id)
+        //console.log(tmp)
+        //console.log(tmp.student_id)
         Swal.fire({
             title: 'Delete Anyway?',
             icon: 'question',
