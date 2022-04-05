@@ -6,7 +6,7 @@
 </div>
 
 <div align="center">
-    <img alt="Detect your uniform" src="https://user-images.githubusercontent.com/81949526/161523946-a6e36ce1-61c1-4975-bf35-e4affc84afed.png" width="80%"/><br/><br/>
+    <img alt="Detect your uniform" src="https://user-images.githubusercontent.com/68190553/161663202-e71b99e9-317b-4517-a0d3-46df6318e581.png" width="80%"/><br/><br/>
 </div>
 Korean schools have rules for wearing neat school uniforms to school.However, some students go to school wearing school uniforms that are not neat or mended.Therefore, in Korean schools, student instructors often give penalty points to students who do not wear neat school uniforms.<br/><br/>
 
