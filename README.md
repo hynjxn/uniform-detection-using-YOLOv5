@@ -128,10 +128,10 @@ You can set info.yaml as follow:
 ```yaml
 account:
   mysql:
-    host: put your DB host
-    user: put your id
-    password: put your PW
-    db: put your DB name
+    host: Input your DB host
+    user: Input your id
+    password: Input your PW
+    db: Input your DB name
     charset: utf8mb4
 ```
 
