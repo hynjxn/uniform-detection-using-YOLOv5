@@ -8,7 +8,7 @@ from server.model.detect import do_detect
 import warnings
 warnings.filterwarnings(action='ignore')
 
-with open('info.yaml') as f:
+with open('././info.yaml') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
     mysql_config = config['account']['mysql']
     MYSQL_HOST = mysql_config['host']
@@ -79,7 +79,7 @@ db = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, password=MYSQL_PW, db=MYS
 @app.route('/penalty/list', methods=['GET'])
 def view_pen():
     cursor = db.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT * FROM penalty_table"
+    sql = "SELECT * FROM penalty_table order by student_id asc"
     cursor.execute(query=sql)
     result = cursor.fetchall()
     return jsonify({'result': 'success', 'penalties': result})
@@ -90,12 +90,18 @@ def search_pen():
     idOrName = request.json['id_or_name'] # id = 0, name = 1
     if (idOrName == 0) :
         id = request.json['student_id_or_name']
+        if (id == "") :
+            sql = "SELECT * FROM penalty_table order by student_id asc"
+        else :
+            sql = "SELECT * FROM penalty_table WHERE student_id=\"" + id + "\" order by student_id asc"
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = "SELECT * FROM penalty_table WHERE student_id=\"" + id + "\"";
     elif (idOrName == 1):
         name = request.json['student_id_or_name']
+        if (name == "") :
+            sql = "SELECT * FROM penalty_table order by student_id asc"
+        else :
+            sql = "SELECT * FROM penalty_table WHERE student_name LIKE concat('%','" +name+ "','%') order by student_id asc"
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = "SELECT * FROM penalty_table WHERE student_name=\"" + name + "\"";
 
     cursor.execute(query=sql)
     result = cursor.fetchall()
@@ -161,7 +167,7 @@ def applyToDb():
     id = request.json['student_id']
     point = int(request.json['point'])
     cursor_1 = db.cursor()
-    sql_1="SELECT student_name, penalty_points FROM penalty_table WHERE student_id=\"" +id+ "\";"
+    sql_1 = "SELECT student_name, penalty_points FROM penalty_table WHERE student_id=\"" +id+ "\";"
     cursor_1.execute(query=sql_1)
     row = cursor_1.fetchone()
 
@@ -172,9 +178,15 @@ def applyToDb():
         pre_penalty = row[1]
         new_penalty = str(pre_penalty+point)
         cursor_2 = db.cursor()
-        sql_2="UPDATE penalty_table SET penalty_points=" +new_penalty+ " WHERE student_id=\"" +id+ "\";"
+        cursor_3 = db.cursor()
+        sql_2 = "UPDATE penalty_table SET penalty_points=" +new_penalty+ " WHERE student_id=\"" +id+ "\";"
+        sql_3 = "INSERT INTO attendance_table(student_id, attend_date, student_name) " \
+                "select \"" +id+ "\", date_format(now(), '%Y-%m-%d'), \"" +name+ "\" " \
+                "from dual " \
+                "where not exists (select * from attendance_table where student_id=\"" +id+ "\" and attend_date=date_format(now(), '%Y-%m-%d'))"
         try:
             cursor_2.execute(sql_2)
+            cursor_3.execute(sql_3)
             db.commit()
         except Exception as e:
             print(str(e))
@@ -191,7 +203,7 @@ def get_att():
     sql = "select P.student_id, P.student_name, if (A.attend_date IS null, 'X', 'O') AS attendance " \
           "from penalty_table P " \
           "left outer join attendance_table A on P.student_id = A.student_id " \
-          "and A.attend_date = date(\"" +date+ "\");"
+          "and A.attend_date = date(\"" +date+ "\") order by P.student_id asc;"
     try:
         cursor.execute(sql)
         result = cursor.fetchall()

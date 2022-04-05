@@ -2,13 +2,14 @@
 
 <div align="center">
     <img src="https://user-images.githubusercontent.com/68190553/160357007-8491d572-6e1c-47a5-9c5b-37ffdb9db4cb.png" width="40%"/><br/><br/>
-<h2 align=center>This repo is a project to detect students bad uniforms using YOLOv5 🚀</h2>
+<h2 align=center>This repo is a project to detect students inappropriate uniforms using YOLOv5 🚀</h2>
 </div>
 
 <div align="center">
-    <img width="1918" alt="Detect your uniform" src="https://user-images.githubusercontent.com/68190553/160402942-e435c674-b434-4c7c-bf73-c117628469ec.png" width="100%"/><br/><br/>
+    <img alt="Detect your uniform" src="https://user-images.githubusercontent.com/81949526/161523946-a6e36ce1-61c1-4975-bf35-e4affc84afed.png" width="80%"/><br/><br/>
 </div>
-Korean schools have rules for wearing neat school uniforms to school.However, some students go to school wearing school uniforms that are not neat or mended.Therefore, in Korean schools, student instructors often give penalty points to students who do not wear neat school uniforms.<br/>
+Korean schools have rules for wearing neat school uniforms to school.However, some students go to school wearing school uniforms that are not neat or mended.Therefore, in Korean schools, student instructors often give penalty points to students who do not wear neat school uniforms.<br/><br/>
+
 We decided that this process was very subjective and wasted manpower, so we planned this project to replace it with the role of artificial intelligence.
 This project not only proposes artificial intelligence that replaces the role of the student instructor, but also proposes a service that can manage penalty points and attendance.
 <br/> <br/>
@@ -37,15 +38,17 @@ ii) 여름에 입는 하계복만 고려<br/>
 ---
 
 ## Documentation
-### Porejct Architecture 
+### Proejct Structure
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/68190553/160403502-05b1bdec-b951-47bc-b4d5-60b82d7f8f17.png" width="80%"/>
+    <img src="https://user-images.githubusercontent.com/68190553/161418538-3f6b0638-cbf1-4b7c-ada9-0c8fbd3a0ac6.png" width="80%"/>
 </div>
 
 ### ERD
 <div align="center">
-    <img alt="image" src="https://user-images.githubusercontent.com/68190553/160404256-b3197ffb-cae6-4ead-ab35-ab9b25a02469.png" width="25%">
+    <img alt="image" src="https://user-images.githubusercontent.com/94098910/161419628-909d6ab5-2efc-45ad-a27d-37d4c7d908d1.png" width="35%">
 </div>
+
+
 
 ### Model Performance
 <div align="center">
@@ -64,36 +67,79 @@ ii) 여름에 입는 하계복만 고려<br/>
 </details>
 
 ### Members
+
+<table>
+  <tr>
+    <td align="center">
+        <a href="https://github.com/jerife">
+            <img src="https://user-images.githubusercontent.com/68190553/161420117-a4c01c9f-7ac0-4c18-a364-974df1574272.png" width="100px;" alt=""/>
+            <br /><sub><b>Jaewoo Park</b></sub></a>
+        </a>
+      </td>
+    <td align="center">
+        <a href="https://github.com/hynjxn">
+            <img src="https://user-images.githubusercontent.com/68190553/161420461-1067b26a-70af-4121-9024-70f8bb598b22.png" width="100px;" alt=""/>
+            <br /><sub><b>Hyunjin Lee</b></sub></a>
+        </a>
+      </td>
+    <td align="center">
+        <a href="https://github.com/minah9999">
+            <img src="https://user-images.githubusercontent.com/68190553/161420485-71dca094-b38a-43c4-b201-f63b86dce1fe.png" width="100px;" alt=""/>
+            <br /><sub><b>Minah Choi</b></sub></a>
+        </a>
+      </td>
+    <td align="center">
+        <a href="https://github.com/ShinEun9">
+            <img src="https://user-images.githubusercontent.com/68190553/161420569-30e9f979-8ab4-4772-9066-324a5f310fbf.png" width="100px;" alt=""/>
+            <br /><sub><b>Eunsu Shin</b></sub></a>
+        </a>
+      </td>
+</table>
+
+
+
 ```
 - Jaewoo Park (jerife@naver.com)
 - Hyunjin Lee (shsan0324@gmail.com)
 - Minah Choi (mina7245@gmail.com)
 - Eunsu Shin (ses2201@g.hongik.ac.kr)
 ```
+
 ---
 
 ## Usage
 ### Installation with virtual environment
 ```bash
-git clone https://github.com/hynjxn/Uniform-Detection-Using-YOLOv5.git
-cd Uniform-Detection-Using-YOLOv5
+$ git clone https://github.com/hynjxn/Uniform-Detection-Using-YOLOv5.git
+$ cd Uniform-Detection-Using-YOLOv5
 
-conda create -n project python=3.9
-conda activate project
+$ conda create -n project python=3.9
+$ conda activate project
 
 # PyTorch installation process may vary depending on your hardware (1.7.0 <= pytorch <= 1.9.0)
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
-pip install -r requirements.txt
+$ conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
+$ pip install -r requirements.txt
 
 # Edit info.yaml to connect with your DB
-vim info.yaml
+$ vim info.yaml
+```
+You can set info.yaml as follow:
+
+```yaml
+account:
+  mysql:
+    host: put your DB host
+    user: put your id
+    password: put your PW
+    db: put your DB name
+    charset: utf8mb4
 ```
 
 ### Run
 ```bash
 # Run with python
-python wsgi.py 
+$ python wsgi.py 
 
 # Run with gunicorn
-gunicorn --bind 0.0.0.0:5000 wsgi:app
+$ gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```

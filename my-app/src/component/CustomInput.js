@@ -17,14 +17,14 @@ function CustomInput({
     let element;
     if (type === "normalInput") {
         element = <OutlinedInput
-            id="outlined-adornment-weight"
+            size={"small"} id="outlined-adornment-weight"
             name={name}
             value={input}
             defaultValue={defaultValue}
             onChange={onChangeFunction}
             style={{
                 width: "80%",
-                borderRadius: "20px",
+                borderRadius: "15px",
                 fontFamily: Style.font,
                 textAlign: "center"
             }}

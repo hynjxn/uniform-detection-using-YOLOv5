@@ -13,20 +13,7 @@ import {faFloppyDisk, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 
 function PenaltyPage(props) {
-   // const contents = [{
-   //     student_id: "21319", student_name: "신은수", parent_ph:
-   //         "010-4710-6207", penalty_points: "-17"
-   // }, {
-   //     student_id: "21320", student_name: "신은수", parent_ph:
-   //         "010-4710-6207", penalty_points: "-17"
-   // }];
-
-    const [contents, setContents] = useState([{
-        student_id: "",
-        student_name: "",
-        parent_ph: "",
-        penalty_points: ""
-    }]);
+    const [contents, setContents] = useState([]);
     const [word, setWord] = useState({input: "", select: "student_id"});
     const [currentInfo, setCurrentInfo] = useState({
         student_id: "",
@@ -36,24 +23,32 @@ function PenaltyPage(props) {
     })
 
     const [open, setOpen] = React.useState(false);
-    const [addOrEdit,setAddOrEdit] = React.useState("");
+    const [addOrEdit, setAddOrEdit] = React.useState("");
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
         // 모든 학생 불러오기 api 호출
         axios.get("/penalty/list")
-             .then((result)=>{
+            .then((result) => {
                 let list = result.data.penalties;
                 //console.log("list : ", list);
                 setContents(list);
-             })
-            .catch(()=>{console.log("fail");})
+            })
+            .catch(() => {
+                Swal.fire({
+                    icon: "error",
+                    title:"Load Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
+            })
     }, []);
 
-    useEffect(()=>{
-        console.log(word)
-    },[word])
+    useEffect(() => {
+        //console.log(word)
+    }, [word])
 
     const handleSearchFormChange = (e) => {
         const {name, value} = e.target;
@@ -68,13 +63,24 @@ function PenaltyPage(props) {
         })
     }
 
-    const searchFunction = (e)=>{
+    const searchFunction = (e) => {
         e.preventDefault();
-        axios.post("/penalty/search", {id_or_name: word.select==="student_name"?1:0, student_id_or_name: word.input})
-            .then((result)=> {
-                console.log(result.data)
+        axios.post("/penalty/search", {
+            id_or_name: word.select === "student_name" ? 1 : 0,
+            student_id_or_name: word.input
+        })
+            .then((result) => {
+                setContents(result.data.penalties)
             })
-            .catch(()=>{console.log("search fail")})
+            .catch(() => {
+                Swal.fire({
+                    icon: "error",
+                    title:"Search Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
+            })
     }
 
     const clickAddButtonFunction = () => {
@@ -99,39 +105,58 @@ function PenaltyPage(props) {
     }
 
     const saveStudentFunction = () => {
-        if(addOrEdit === "Add"){
+        if (addOrEdit === "Add") {
             // 새로운 학생 저장 api 호출
             axios.post("/penalty/add", currentInfo)
-                .then((result)=>{
-                    if(result.data.result == 'success'){
+                .then((result) => {
+                    if (result.data.result == 'success') {
                         window.location.reload(); // 정상적으로 db에 저장되면 현재 페이지 새로고침
                     }
                 })
-                .catch(()=>{console.log("add fail");})
-        }
-        else if(addOrEdit === "Edit"){
+                .catch(() => {
+                   Swal.fire({
+                       icon: "error",
+                       title:"Save Fail.",
+                       text: "Try Again Please",
+                       confirmButtonText: 'OK',
+                       confirmButtonColor: Style.color1,
+                   })
+                })
+        } else if (addOrEdit === "Edit") {
             // 기존 학생 수정 api 호출
             axios.post("/penalty/fix", currentInfo)
-                .then((result)=>{
-                    if(result.data.result == 'success'){
+                .then((result) => {
+                    if (result.data.result == 'success') {
                         window.location.reload();
                     }
                 })
-                .catch(()=>{console.log("edit fail");})
+                .catch(() => {
+                    Swal.fire({
+                        icon: "error",
+                        title:"Edit Fail.",
+                        text: "Try Again Please",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: Style.color1,
+                    })
+                })
         }
     }
 
     const deleteFunction = (e) => {
-        console.log(e.target);
-        console.log(e.target.parentNode);
-        console.log(e.target.parentNode.getAttribute('name'));
+        //console.log(e.target);
+        //console.log(e.target.parentNode);
+        //console.log(e.target.parentNode.getAttribute('name'));
 
+        let tmp;
         if (e.target.getAttribute('name') != null) {
-            setCurrentInfo(contents[parseInt(e.target.getAttribute('name'))])
+            tmp = contents[parseInt(e.target.getAttribute('name'))]
         } else {
-            setCurrentInfo(contents[parseInt(e.target.parentNode.getAttribute('name'))])
-        };
+            tmp = contents[parseInt(e.target.parentNode.getAttribute('name'))]
+        }
+        ;
 
+        //console.log(tmp)
+        //console.log(tmp.student_id)
         Swal.fire({
             title: 'Delete Anyway?',
             icon: 'question',
@@ -142,14 +167,21 @@ function PenaltyPage(props) {
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
                 // 기존 학생 삭제 api 호출
-                console.log(currentInfo)
-                axios.post("/penalty/delete", {student_id : currentInfo.student_id})
-                    .then((result)=>{
-                        if(result.data.result == 'success'){
+                axios.post("/penalty/delete", {student_id: tmp.student_id})
+                    .then((result) => {
+                        if (result.data.result == 'success') {
                             window.location.reload();
                         }
-                     })
-                    .catch(()=>{console.log("delete fail")})
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            icon: "error",
+                            title:"Delete Fail.",
+                            text: "Try Again Please",
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: Style.color1,
+                        })
+                    })
             },
             allowOutsideClick: () => !Swal.isLoading()
         })
@@ -163,20 +195,24 @@ function PenaltyPage(props) {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "80%",
-                position:"relative"
+                minWidth: 600,
+                position: "relative",
             }}>
-                <CustomInput type="penaltyInput" width="50%"  onSearchFunction={searchFunction} onChangeFunction={handleSearchFormChange}
-                                                         input={word.input}
-                                                         select={word.select}/>
-                <div style={{position:"absolute", right:"13%"}}><CustomButton width="auto" content={
-                    <>
-                        <FontAwesomeIcon name="scanner" icon={faUserPlus} color="white"
-                                         style={{fontSize: 20, marginRight: "10"}}/>
-                        <span style={{fontSize: 18}}>Add</span>
-                    </>
-                }
-                                                          onClickFunction={clickAddButtonFunction}
-                                                          backgroundColor={Style.color1}/>
+                <div style={{width: "25%"}}></div>
+                <CustomInput type="penaltyInput" width="50%" onSearchFunction={searchFunction}
+                             onChangeFunction={handleSearchFormChange}
+                             input={word.input}
+                             select={word.select}/>
+                <div style={{width: "25%", marginLeft: "20px"}}>
+                    <CustomButton width="auto" content={
+                        <>
+                            <FontAwesomeIcon name="scanner" icon={faUserPlus} color="white"
+                                             style={{fontSize: 20, marginRight: "10"}}/>
+                            <span style={{fontSize: 18}}>Add</span>
+                        </>
+                    }
+                                  onClickFunction={clickAddButtonFunction}
+                                  backgroundColor={Style.color1}/>
                 </div>
             </div>
             <CustomTable type="penaltyTable" contents={contents} deleteFunction={deleteFunction}
@@ -187,7 +223,7 @@ function PenaltyPage(props) {
                     <StudentAddForm onChangeFunction={handleAddFormInputChange}
                                     onSaveStudentFunction={saveStudentFunction} onCloseModalFunction={handleClose}
                                     currentInfo={currentInfo}
-                                    addOrEdit = {addOrEdit}
+                                    addOrEdit={addOrEdit}
                     />
 
                 </Box>
@@ -199,13 +235,13 @@ function PenaltyPage(props) {
 const Main = styled.div`
   width: 100%;
   height: 80vh;
+    min-height:470px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 
 const style = {

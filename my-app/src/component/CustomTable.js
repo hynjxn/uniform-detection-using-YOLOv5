@@ -12,11 +12,11 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function CustomTable({type, contents, deleteFunction, editFunction}) {
     let element;
-   if (type === "penaltyTable") {
+    if (type === "penaltyTable") {
         element = <TableContainer sx={{
             width: "80%",
-            borderRadius: "10px",
-            boxShadow: "rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset",
+            borderRadius: "20px",
+            border: "1px solid #E5E4E2",
             maxHeight: 700,
             overflow: "auto",
         }}>
@@ -24,29 +24,54 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell></StyledTableCell>
-                        <StyledTableCell align="center">StudentID</StyledTableCell>
-                        <StyledTableCell align="center">StudentName</StyledTableCell>
+                        <StyledTableCell align="center">Student ID</StyledTableCell>
+                        <StyledTableCell align="center">Student Name</StyledTableCell>
                         <StyledTableCell align="center">Parent PhoneNumber</StyledTableCell>
-                        <StyledTableCell align="center">PenaltyPoints</StyledTableCell>
+                        <StyledTableCell align="center">Penalty Points</StyledTableCell>
                         <StyledTableCell align="center"></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {contents.map((content, index) => (
-                        <StyledTableRow key={index+1}>
-                            <StyledTableCell component="th" scope="row" align="center">
-                                {index+1}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">{content.student_id}</StyledTableCell>
-                            <StyledTableCell align="center">{content.student_name}</StyledTableCell>
-                            <StyledTableCell align="center">{content.parent_ph}</StyledTableCell>
-                            <StyledTableCell align="center">{content.penalty_points}</StyledTableCell>
-                            <StyledTableCell name={index} align="center">
-                                <DeleteIcon name={index} style={{marginRight: "20px", cursor: "pointer"}} onClick={deleteFunction}/>
-                                <EditIcon name={index} style={{cursor: "pointer"}} onClick={editFunction}/>
-                            </StyledTableCell>
+                    {contents.length != 0 ?
+
+                        contents.map((content, index) => (
+                            <StyledTableRow key={index + 1}>
+                                <StyledTableCell component="th" scope="row" align="center">
+                                    {index + 1}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{content.student_id}</StyledTableCell>
+                                <StyledTableCell align="center">{content.student_name}</StyledTableCell>
+                                <StyledTableCell align="center">{content.parent_ph}</StyledTableCell>
+                                <StyledTableCell align="center">{content.penalty_points}</StyledTableCell>
+                                <StyledTableCell name={index} align="center">
+                                    <DeleteIcon name={index} style={{marginRight: "20px", cursor: "pointer"}}
+                                                onClick={deleteFunction}/>
+                                    <EditIcon name={index} style={{cursor: "pointer"}} onClick={editFunction}/>
+                                </StyledTableCell>
+
+                            </StyledTableRow>
+                        ))
+
+                        :
+                        <StyledTableRow>
+                            <TableCell colSpan="6" style={{textAlign:"center"}}>No Data
+                            </TableCell>
                         </StyledTableRow>
-                    ))}
+                    }
+                    {/*<StyledTableRow>*/}
+                    {/*    <StyledTableCell component="th" scope="row" align="center">*/}
+                    {/*        2*/}
+                    {/*    </StyledTableCell>*/}
+                    {/*    <StyledTableCell align="center">a</StyledTableCell>*/}
+                    {/*    <StyledTableCell align="center">b</StyledTableCell>*/}
+                    {/*    <StyledTableCell align="center">c</StyledTableCell>*/}
+                    {/*    <StyledTableCell align="center">d</StyledTableCell>*/}
+                    {/*    <StyledTableCell align="center">*/}
+                    {/*        <DeleteIcon style={{marginRight: "20px", cursor: "pointer"}}*/}
+                    {/*                    onClick={deleteFunction}/>*/}
+                    {/*        <EditIcon  style={{cursor: "pointer"}} onClick={editFunction}/>*/}
+                    {/*    </StyledTableCell>*/}
+                    {/*</StyledTableRow>*/}
                 </TableBody>
             </Table>
         </TableContainer>
@@ -57,6 +82,7 @@ function CustomTable({type, contents, deleteFunction, editFunction}) {
         element
     );
 }
+
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
         fontFamily: Style.font,

@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 function ScannerPage(props) {
     const [input, setInput] = useState("");
@@ -66,7 +67,7 @@ function ScannerPage(props) {
                 }
                 temp_data["point_sum"] = temp_data["penalty1"] + temp_data["penalty2"]
                 setContents(temp_data);
-                console.log(contents);
+                //console.log(contents);
             })
     }
 
@@ -77,11 +78,20 @@ function ScannerPage(props) {
                 if(result.data.result == "success"){
                     window.location.reload();
                 }else{
-                    console.log("해당 학번이 없습니다")
+                    //console.log("해당 학번이 없습니다")
                 }
             })
-            .catch(()=>{console.log("add fail")})
+            .catch(()=>{
+                Swal.fire({
+                    icon: "error",
+                    title:"Add Fail.",
+                    text: "Try Again Please",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: Style.color1,
+                })
+            })
     }
+
     return (
         <Main>
             <div style={{fontSize: "60px", color: Style.color2, fontWeight: "bold",}}>
@@ -91,9 +101,8 @@ function ScannerPage(props) {
                 <div style={{
                     width: "45%",
                     height: "100%",
-                    background: "pink",
                     marginRight: "30px",
-                    borderRadius: "20px"
+                    borderRadius: "20px",
                 }}><img src={'/video_feed'} style={{width: "100%", height: "100%", borderRadius: "20px"}}/>
 
                 </div>
@@ -157,8 +166,9 @@ export default ScannerPage;
 const Main = styled.div`
   width: 100%;
   height: 80vh;
+  min-height:470px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -170,9 +180,10 @@ const MainInner = styled.div`
   display: flex;
   width: 93%;
   height: 75%;
+  min-height: 270px;
   background-color: ${Style.color3};
   border-radius: 20px;
-  padding: 40px 0px;
+  padding: 30px 0px;
   justify-content: center;
   align-items: center;
 `;
@@ -188,6 +199,7 @@ const Right = styled.div`
 const TableContainer = styled.div`
   width: 100%;
   height: 65%;
+  min-height:150px;
   background-color: ${Style.color2};
   border-radius: 20px;
   margin-bottom: 20px;
@@ -216,6 +228,7 @@ const TableCell = styled.div`
 const RightBottom = styled.div`
   width: 100%;
   height: 55%;
+  min-height:120px;
   background-color: white;
   border-radius: 20px;
   display: flex;

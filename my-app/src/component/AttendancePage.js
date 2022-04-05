@@ -11,12 +11,12 @@ function AttendancePage(props) {
 
     useEffect(() => {
         const str_date = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate() // ex)2022-3-26
-        console.log(str_date)
+        //console.log(str_date)
 
         axios.post("/attendance/get", {attend_date : str_date})
             .then((result)=>{
                 const list = result.data.student_list;
-                console.log(list)
+                //console.log(list)
                 setContents(list);
             })
             .catch(()=>{console.log("get attendance fail")})
@@ -33,7 +33,7 @@ function AttendancePage(props) {
                 <Right>
                     <TableContainer>
                         <TableRow>
-                            <TableCell>StudentID</TableCell>
+                            <TableCell>Student ID</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Attendance</TableCell>
                         </TableRow>
@@ -55,8 +55,9 @@ function AttendancePage(props) {
 const Main = styled.div`
   width: 100%;
   height: 80vh;
+   min-height:470px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-top: 10px;
   display: flex;
   justify-content: center;
@@ -80,6 +81,7 @@ const Left = styled.div`
   height: 90%;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: white;
   border-radius: 20px;
 `;
@@ -105,7 +107,7 @@ const TableContainer = styled.div`
 `;
 
 const TableRow = styled.div`
-  width: 85%;
+  width: 75%;
   display: flex;
   justify-content: space-between;
   padding-bottom: 5px;
@@ -121,6 +123,7 @@ const TableRow = styled.div`
 const TableCell = styled.div`
   width: 33%;
   text-align: center;
+  font-size: 18px;
 `
 
 export default AttendancePage;
